@@ -1,0 +1,19 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.5rem;
+  background-color: gold;
+  margin-bottom: 2rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  width: 40%;
+  height: 3rem;
+  justify-content: space-between;
+  align-items: center;
+}

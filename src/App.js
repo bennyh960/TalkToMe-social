@@ -1,25 +1,131 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import storeAPI from "./api/storeAPI";
+import "./App.css";
+import Spinner from "./componenets/spinner/spinner";
+import Shoes from "./componenets/shoes/shoes";
+import NavBar from "./componenets/navbar/navbar";
+import AddNewItem from "./componenets/sellerUpdate/addNewItem";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  state = { storeData: [], isSpinner: true };
+
+  // Get
+  async componentDidMount() {
+    try {
+      const getStoreData = await storeAPI.get();
+      this.setState({ storeData: getStoreData.data, isSpinner: false });
+    } catch (error) {
+      console.log("Error Benny:", error);
+    }
+  }
+
+  // Post
+  // addNewProduct = async ({ name, brand, image, description, price }) => {
+  addNewProduct = async (NewProductObjToAdd) => {
+    this.setState((prev) => {
+      return { isSpinner: !prev.isSpinner };
+    });
+    try {
+      const NewProduct = await storeAPI.post("", NewProductObjToAdd);
+      console.log(NewProduct);
+      // update UI
+      this.setState((prev) => {
+        return { storeData: [...prev.storeData, NewProduct.data], isSpinner: !prev.isSpinner };
+      });
+    } catch (error) {
+      console.log("Benny Post Error:", error);
+    }
+  };
+
+  // Delete
+  handleDelete = async (deletedItemID) => {
+    const itemToDelete = this.state.storeData.find((item) => {
+      return item.id === deletedItemID;
+    });
+    // console.log(itemToDelete);
+
+    try {
+      const deletedItem = await storeAPI.delete(`:${deletedItemID}`, itemToDelete);
+      console.log(deletedItem);
+    } catch (error) {
+      console.log("Benny Delete Error:", error);
+    }
+  };
+
+  // UI - HomePage
+  drawItems = (isUpdate) => {
+    return this.state.storeData.map(({ name, id, price, image, brand, description }) => {
+      return (
+        <Shoes
+          key={id}
+          name={name}
+          id={id}
+          price={price}
+          image={image}
+          brand={brand}
+          description={description}
+          container={"shoe-container"}
+          update={isUpdate}
+          handleDelete={this.handleDelete}
+          // container={containerName}
+        />
+      );
+    });
+  };
+  // UI - Extra for UX
+  drawOneItem = () => {
+    return this.state.storeData.map(({ name, id, price, image, brand, description }) => {
+      return (
+        <Route path={`/${id}`} key={id}>
+          <Shoes
+            name={name}
+            id={id}
+            price={price}
+            image={image}
+            brand={brand}
+            description={description}
+            container={"shoe-container-one-item"}
+          />
+        </Route>
+      );
+    });
+  };
+
+  render() {
+    if (this.state.isSpinner) {
+      return (
+        <>
+          <BrowserRouter>
+            <NavBar />
+          </BrowserRouter>
+          <Spinner />
+        </>
+      );
+    } else {
+      return (
+        <BrowserRouter>
+          <NavBar />
+          {/* <Switch> */}
+          <Route path={"/"} exact>
+            <h1 style={{ textAlign: "center" }}>Brand New</h1>
+            <div className="store-container">{this.drawItems(false)}</div>
+          </Route>
+          <Route path={"/update"} exact>
+            <h1 style={{ textAlign: "center", margin: "2rem" }}>Store Update</h1>
+            <AddNewItem addNewItem={this.addNewProduct} />
+            <div className="store-container-update">{this.drawItems(true)}</div>
+          </Route>
+
+          <div className="shoe-container-one-item">{this.drawOneItem()}</div>
+
+          {/* </Switch> */}
+        </BrowserRouter>
+      );
+    }
+  }
 }
 
-export default App;
+function About() {
+  return <div>About</div>;
+}

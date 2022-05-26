@@ -1,0 +1,32 @@
+.form {
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid black; */
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.form > * {
+  display: flex;
+  gap: 1rem;
+  /* border: 1px solid red; */
+  width: 40%;
+  justify-content: space-between;
+  /* text-align: left; */
+}
+
+.form h3 {
+  /* border: 1px solid red; */
+  /* justify-self: center;
+  text-align: center;
+  align-self: center; */
+  color: rgb(70, 70, 70);
+  margin-left: 15rem;
+}
+.update-new-btn {
+  text-align: center;
+  width: fit-content;
+}
