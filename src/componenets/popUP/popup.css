@@ -1,0 +1,26 @@
+.pop-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(218, 218, 228, 0.106);
+  /* z-index: 100; */
+}
+
+.pop-up-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  width: 25rem;
+  height: 15rem;
+  border: 2px solid black;
+  background-color: rgb(155, 156, 136);
+  border-radius: 1rem;
+  text-align: center;
+}

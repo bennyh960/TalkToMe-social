@@ -6,6 +6,7 @@ import Spinner from "./componenets/spinner/spinner";
 import Shoes from "./componenets/shoes/shoes";
 import NavBar from "./componenets/navbar/navbar";
 import AddNewItem from "./componenets/sellerUpdate/addNewItem";
+import Popup from "./componenets/popUP/popup";
 
 export default class App extends Component {
   state = { storeData: [], isSpinner: true };
@@ -28,7 +29,7 @@ export default class App extends Component {
     });
     try {
       const NewProduct = await storeAPI.post("", NewProductObjToAdd);
-      console.log(NewProduct);
+
       // update UI
       this.setState((prev) => {
         return { storeData: [...prev.storeData, NewProduct.data], isSpinner: !prev.isSpinner };
@@ -40,14 +41,19 @@ export default class App extends Component {
 
   // Delete
   handleDelete = async (deletedItemID) => {
-    const itemToDelete = this.state.storeData.find((item) => {
-      return item.id === deletedItemID;
+    this.setState((prev) => {
+      return { isSpinner: !prev.isSpinner };
     });
-    // console.log(itemToDelete);
+
+    const updatedItemsArr = this.state.storeData.filter((item) => {
+      return item.id !== deletedItemID;
+    });
 
     try {
-      const deletedItem = await storeAPI.delete(`:${deletedItemID}`, itemToDelete);
-      console.log(deletedItem);
+      await storeAPI.delete(`/${deletedItemID}`);
+      this.setState((prev) => {
+        return { storeData: updatedItemsArr, isSpinner: !prev.isSpinner };
+      });
     } catch (error) {
       console.log("Benny Delete Error:", error);
     }
