@@ -67,7 +67,7 @@ export default class Shoes extends Component {
           <Link to={this.props.id} className="shoe-link">
             <img className="shoe" src={this.props.image} alt={this.props.description} />
           </Link>
-          <div>{this.props.name}</div>
+          <h3>{this.props.name}</h3>
           <div>{this.props.brand}</div>
           <div>{this.props.price}$</div>
           {this.props.update && (

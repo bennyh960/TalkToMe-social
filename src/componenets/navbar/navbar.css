@@ -12,8 +12,16 @@ a {
 
 .navbar-links {
   display: flex;
-  width: 40%;
+  width: 50%;
   height: 3rem;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  font-weight: bold;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: bold;
 }

@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 export default function NavBar() {
   return (
     <div className="navbar">
-      <div>Logo</div>
+      {/* <div>Logo</div> */}
+      <div className="logo">
+        <img src="./logo192.png" alt="" height={"25rem"} />
+        ShopME.il
+      </div>
       <div className="navbar-links">
         <Link to={"/"}>HomePage</Link>
         <Link to={"/update"}>Seller Update</Link>
