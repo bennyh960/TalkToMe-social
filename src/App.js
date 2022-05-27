@@ -1,28 +1,26 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import storeAPI from "./api/storeAPI";
 import "./App.css";
 import Spinner from "./componenets/spinner/spinner";
 import Shoes from "./componenets/shoes/shoes";
 import NavBar from "./componenets/navbar/navbar";
 import AddNewItem from "./componenets/sellerUpdate/addNewItem";
-import Popup from "./componenets/popUP/popup";
 
 export default class App extends Component {
   state = { storeData: [], isSpinner: true };
 
-  // Get
+  //* Get
   async componentDidMount() {
     try {
       const getStoreData = await storeAPI.get();
       this.setState({ storeData: getStoreData.data, isSpinner: false });
     } catch (error) {
-      console.log("Error Benny:", error);
+      console.log("Error:", error);
     }
   }
 
-  // Post
-  // addNewProduct = async ({ name, brand, image, description, price }) => {
+  //* Post request
   addNewProduct = async (NewProductObjToAdd) => {
     this.setState((prev) => {
       return { isSpinner: !prev.isSpinner };
@@ -30,16 +28,16 @@ export default class App extends Component {
     try {
       const NewProduct = await storeAPI.post("", NewProductObjToAdd);
 
-      // update UI
+      //* update UI
       this.setState((prev) => {
         return { storeData: [...prev.storeData, NewProduct.data], isSpinner: !prev.isSpinner };
       });
     } catch (error) {
-      console.log("Benny Post Error:", error);
+      console.log("Post Error:", error);
     }
   };
 
-  // Delete
+  //* Delete request
   handleDelete = async (deletedItemID) => {
     this.setState((prev) => {
       return { isSpinner: !prev.isSpinner };
@@ -51,15 +49,16 @@ export default class App extends Component {
 
     try {
       await storeAPI.delete(`/${deletedItemID}`);
+      // * Update UI
       this.setState((prev) => {
         return { storeData: updatedItemsArr, isSpinner: !prev.isSpinner };
       });
     } catch (error) {
-      console.log("Benny Delete Error:", error);
+      console.log("Delete Error:", error);
     }
   };
 
-  // PUT -edit
+  //* PUT request
   handleEdit = async (id, name, brand, price, description, image) => {
     this.setState({ isSpinner: true });
     const findItemObjectToUpdate = this.state.storeData.find((item) => item.id === id);
@@ -67,6 +66,7 @@ export default class App extends Component {
 
     try {
       const { data } = await storeAPI.put(`/${id}`, updatedItem);
+      // * Update UI
       this.setState((prev) => {
         return {
           storeData: prev.storeData.map((item) => {
@@ -79,11 +79,11 @@ export default class App extends Component {
         };
       });
     } catch (error) {
-      console.log("Error Benny from PUT request:", error);
+      console.log("Error PUT request:", error);
     }
   };
 
-  // UI - HomePage
+  //* UI - HomePage
   drawItems = (isUpdate) => {
     return this.state.storeData.map(({ name, id, price, image, brand, description }) => {
       return (
@@ -99,12 +99,11 @@ export default class App extends Component {
           update={isUpdate}
           handleDelete={this.handleDelete}
           handleEdit={this.handleEdit}
-          // container={containerName}
         />
       );
     });
   };
-  // UI - Extra for UX
+  //* UI - Extra for UX
   drawOneItem = () => {
     return this.state.storeData.map(({ name, id, price, image, brand, description }) => {
       return (
@@ -141,6 +140,7 @@ export default class App extends Component {
         <BrowserRouter>
           <NavBar />
           {/* <Switch> */}
+          {this.state.isSpinner && <Spinner />}
           <Route path={"/"} exact>
             <h1 style={{ textAlign: "center" }}>Brand New</h1>
             <div className="store-container">{this.drawItems(false)}</div>
@@ -158,8 +158,4 @@ export default class App extends Component {
       );
     }
   }
-}
-
-function About() {
-  return <div>About</div>;
 }
