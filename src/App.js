@@ -59,6 +59,19 @@ export default class App extends Component {
     }
   };
 
+  // PUT -edit
+  handleEdit = async (value, id) => {
+    console.log("edit sync:", value, id);
+    // const updateItem = {
+    //   name: value,
+    // };
+
+    const findItemObjectToUpdate = this.state.storeData.find((item) => item.id === id);
+    const updatedItem = { ...findItemObjectToUpdate, name: value };
+    console.log(findItemObjectToUpdate);
+    const { data } = await storeAPI.put(`/${id}`, updatedItem);
+  };
+
   // UI - HomePage
   drawItems = (isUpdate) => {
     return this.state.storeData.map(({ name, id, price, image, brand, description }) => {
@@ -74,6 +87,7 @@ export default class App extends Component {
           container={"shoe-container"}
           update={isUpdate}
           handleDelete={this.handleDelete}
+          handleEdit={this.handleEdit}
           // container={containerName}
         />
       );
@@ -92,6 +106,7 @@ export default class App extends Component {
             brand={brand}
             description={description}
             container={"shoe-container-one-item"}
+            handleInputEditItem={this.handleInputEditItem}
           />
         </Route>
       );
