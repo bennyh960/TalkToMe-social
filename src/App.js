@@ -60,16 +60,27 @@ export default class App extends Component {
   };
 
   // PUT -edit
-  handleEdit = async (value, id) => {
-    console.log("edit sync:", value, id);
-    // const updateItem = {
-    //   name: value,
-    // };
-
+  handleEdit = async (id, name, brand, price, description, image) => {
+    this.setState({ isSpinner: true });
     const findItemObjectToUpdate = this.state.storeData.find((item) => item.id === id);
-    const updatedItem = { ...findItemObjectToUpdate, name: value };
-    console.log(findItemObjectToUpdate);
-    const { data } = await storeAPI.put(`/${id}`, updatedItem);
+    const updatedItem = { ...findItemObjectToUpdate, name: name, brand, price, description, image };
+
+    try {
+      const { data } = await storeAPI.put(`/${id}`, updatedItem);
+      this.setState((prev) => {
+        return {
+          storeData: prev.storeData.map((item) => {
+            if (item.id === id) {
+              return data;
+            }
+            return item;
+          }),
+          isSpinner: !prev.isSpinner,
+        };
+      });
+    } catch (error) {
+      console.log("Error Benny from PUT request:", error);
+    }
   };
 
   // UI - HomePage
@@ -98,6 +109,7 @@ export default class App extends Component {
     return this.state.storeData.map(({ name, id, price, image, brand, description }) => {
       return (
         <Route path={`/${id}`} key={id}>
+          <h2 style={{ marginTop: "3rem" }}>{name}</h2>
           <Shoes
             name={name}
             id={id}
@@ -108,6 +120,7 @@ export default class App extends Component {
             container={"shoe-container-one-item"}
             handleInputEditItem={this.handleInputEditItem}
           />
+          <h4>{description}</h4>
         </Route>
       );
     });

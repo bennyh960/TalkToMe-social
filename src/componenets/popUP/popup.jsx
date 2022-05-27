@@ -24,55 +24,49 @@ class InputToEdit extends Component {
   state = {
     nameIn: this.props.dataToEdit.name,
     ID: this.props.dataToEdit.id,
-    // imageIn: this.props.dataToEdit.image,
-    // descriptionIn: this.props.dataToEdit.description,
-    // brandIn: this.props.dataToEdit.brand,
-    // priceIn: this.props.dataToEdit.price,
+    imageIn: this.props.dataToEdit.image,
+    descriptionIn: this.props.dataToEdit.description,
+    brandIn: this.props.dataToEdit.brand,
+    priceIn: this.props.dataToEdit.price,
   };
   handleInputEditItem = (e) => {
     e.preventDefault();
     // console.log(e.target.id, e.target.value);
-    this.setState((prev) => {
-      return { [e.target.id]: e.target.value };
-    });
-    this.props.handleEdit(e.target.value, this.state.ID);
+    this.setState(
+      (prev) => {
+        return { [e.target.id]: e.target.value };
+      },
+      () => {
+        this.props.handleEdit(this.state);
+      }
+    );
+    // this.props.handleEdit(e.target.value, this.state.ID);
   };
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <form>
-        <input type="text" value={this.state.nameIn} id="nameIn" onChange={this.handleInputEditItem} />
-        {/* <input type="text" value={this.state.imageIn} id="imageIn" onChange={this.handleInputEditItem} />
-        <input type="text" value={this.state.descriptionIn} id="descriptionIn" onChange={this.handleInputEditItem} />
-        <input type="text" value={this.state.brandIn} id="brandIn" onChange={this.handleInputEditItem} />
-        <input type="number" value={this.state.priceIn} id="priceIn" onChange={this.handleInputEditItem} /> */}
+        <div className="edit-area">
+          <label htmlFor="nameIn">Name:</label>
+          <input type="text" value={this.state.nameIn} id="nameIn" onChange={this.handleInputEditItem} />
+        </div>
+        <div className="edit-area">
+          <label htmlFor="imageIn">Image:</label>
+          <input type="text" value={this.state.imageIn} id="imageIn" onChange={this.handleInputEditItem} />
+        </div>
+        <div className="edit-area">
+          <label htmlFor="descriptionIn">Description:</label>
+          <input type="text" value={this.state.descriptionIn} id="descriptionIn" onChange={this.handleInputEditItem} />
+        </div>
+        <div className="edit-area">
+          <label htmlFor="brandIn">Brand:</label>
+          <input type="text" value={this.state.brandIn} id="brandIn" onChange={this.handleInputEditItem} />
+        </div>
+        <div className="edit-area">
+          <label htmlFor="priceIn">Price:</label>
+          <input type="number" value={this.state.priceIn} id="priceIn" onChange={this.handleInputEditItem} />
+        </div>
       </form>
     );
   }
 }
-// class InputToEdit extends Component {
-//   state = {
-//     nameIn: this.props.dataToEdit.name,
-//     imageIn: this.props.dataToEdit.image,
-//     descriptionIn: this.props.dataToEdit.description,
-//     brandIn: this.props.dataToEdit.brand,
-//     priceIn: this.props.dataToEdit.price,
-//   };
-//   handleInputEditItem = ({ target }) => {
-//     console.log(target.id, target.value);
-//     this.setState((prev) => {
-//       return { [target.id]: target.value };
-//     });
-//   };
-//   render() {
-//     return (
-//       <form>
-//         <input type="text" value={this.state.nameIn} id="nameIn" onChange={this.handleInputEditItem} />
-//         <input type="text" value={this.state.imageIn} id="imageIn" onChange={this.handleInputEditItem} />
-//         <input type="text" value={this.state.descriptionIn} id="descriptionIn" onChange={this.handleInputEditItem} />
-//         <input type="text" value={this.state.brandIn} id="brandIn" onChange={this.handleInputEditItem} />
-//         <input type="number" value={this.state.priceIn} id="priceIn" onChange={this.handleInputEditItem} />
-//       </form>
-//     );
-//   }
-// }

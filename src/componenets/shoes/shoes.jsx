@@ -5,21 +5,36 @@ import "./shoes.css";
 
 // name, id, price, image, brand, description
 export default class Shoes extends Component {
-  state = { isPopUp: false, action: "", massage: "", nameIn: "", id: "" };
+  state = {
+    isPopUp: false,
+    action: "",
+    massage: "",
+    nameIn: "",
+    ID: "",
+    priceIn: "",
+    descriptionIn: "",
+    brandIn: "",
+    imageIn: "",
+  };
   handleDelete = () => {
     this.props.handleDelete(this.props.id);
     this.reverseState();
   };
 
-  handleEdit = (value, id) => {
-    // this.props.handleEdit(value, id);
+  handleEdit = ({ nameIn, ID, priceIn, imageIn, descriptionIn, brandIn }) => {
     this.setState(() => {
-      return { nameIn: value, id };
+      return { nameIn, ID, priceIn, imageIn, brandIn, descriptionIn };
     });
   };
   handleAcceptEdit = () => {
-    console.log("Ready to edit from shoes component:");
-    this.props.handleEdit(this.state.nameIn, this.state.id);
+    this.props.handleEdit(
+      this.state.ID,
+      this.state.nameIn,
+      this.state.brandIn,
+      this.state.priceIn,
+      this.state.descriptionIn,
+      this.state.imageIn
+    );
     this.reverseState();
   };
 
