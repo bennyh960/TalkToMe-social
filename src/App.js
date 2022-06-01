@@ -1,161 +1,57 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import storeAPI from "./api/storeAPI";
+import usersAPI from "./api/usersAPI";
 import "./App.css";
-import Spinner from "./componenets/spinner/spinner";
-import Shoes from "./componenets/shoes/shoes";
 import NavBar from "./componenets/navbar/navbar";
-import AddNewItem from "./componenets/sellerUpdate/addNewItem";
+import Spinner from "./componenets/spinner/spinner";
+import LoginForm from "./componenets/login/login";
+import Error from "./componenets/error/error";
 
-export default class App extends Component {
-  state = { storeData: [], isSpinner: true };
+export const loginContext = React.createContext();
 
-  //* Get
-  async componentDidMount() {
-    try {
-      const getStoreData = await storeAPI.get();
-      this.setState({ storeData: getStoreData.data, isSpinner: false });
-    } catch (error) {
-      console.log("Error:", error);
-    }
-  }
+export default function App() {
+  // * Utils Variables
+  const [isLoading, setIsLOading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorGeneral, setErrorGeneral] = useState("");
 
-  //* Post request
-  addNewProduct = async (NewProductObjToAdd) => {
-    this.setState((prev) => {
-      return { isSpinner: !prev.isSpinner };
-    });
-    try {
-      const NewProduct = await storeAPI.post("", NewProductObjToAdd);
+  // * Login variables
+  const ADMIN = { email: "bennyh960@gmail.com", password: "123", name: "ADMIN" };
+  const [users, setUsers] = useState([ADMIN]);
 
-      //* update UI
-      this.setState((prev) => {
-        return { storeData: [...prev.storeData, NewProduct.data], isSpinner: !prev.isSpinner };
-      });
-    } catch (error) {
-      console.log("Post Error:", error);
-    }
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        // throw new Error();
+        setIsLOading(true);
+        const { data } = await usersAPI.get();
+        setUsers([ADMIN, ...data]);
+        setIsLOading(false);
+      } catch (error) {
+        setIsError(true);
+        setErrorGeneral(error.massage);
+      }
+    };
+    fetchUsers();
+  }, []);
+
+  const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const [isLogedIn, setIsLogedIn] = useState(false);
+
+  const logInObj = {
+    users,
+    user,
+    setUser,
+    isLogedIn,
+    setIsLogedIn,
   };
 
-  //* Delete request
-  handleDelete = async (deletedItemID) => {
-    this.setState((prev) => {
-      return { isSpinner: !prev.isSpinner };
-    });
-
-    const updatedItemsArr = this.state.storeData.filter((item) => {
-      return item.id !== deletedItemID;
-    });
-
-    try {
-      await storeAPI.delete(`/${deletedItemID}`);
-      // * Update UI
-      this.setState((prev) => {
-        return { storeData: updatedItemsArr, isSpinner: !prev.isSpinner };
-      });
-    } catch (error) {
-      console.log("Delete Error:", error);
-    }
-  };
-
-  //* PUT request
-  handleEdit = async (id, name, brand, price, description, image) => {
-    this.setState({ isSpinner: true });
-    const findItemObjectToUpdate = this.state.storeData.find((item) => item.id === id);
-    const updatedItem = { ...findItemObjectToUpdate, name: name, brand, price, description, image };
-
-    try {
-      const { data } = await storeAPI.put(`/${id}`, updatedItem);
-      // * Update UI
-      this.setState((prev) => {
-        return {
-          storeData: prev.storeData.map((item) => {
-            if (item.id === id) {
-              return data;
-            }
-            return item;
-          }),
-          isSpinner: !prev.isSpinner,
-        };
-      });
-    } catch (error) {
-      console.log("Error PUT request:", error);
-    }
-  };
-
-  //* UI - HomePage
-  drawItems = (isUpdate) => {
-    return this.state.storeData.map(({ name, id, price, image, brand, description }) => {
-      return (
-        <Shoes
-          key={id}
-          name={name}
-          id={id}
-          price={price}
-          image={image}
-          brand={brand}
-          description={description}
-          container={"shoe-container"}
-          update={isUpdate}
-          handleDelete={this.handleDelete}
-          handleEdit={this.handleEdit}
-        />
-      );
-    });
-  };
-  //* UI - Extra for UX
-  drawOneItem = () => {
-    return this.state.storeData.map(({ name, id, price, image, brand, description }) => {
-      return (
-        <Route path={`/${id}`} key={id}>
-          <h2 style={{ marginTop: "3rem" }}>{name}</h2>
-          <Shoes
-            name={name}
-            id={id}
-            price={price}
-            image={image}
-            brand={brand}
-            description={description}
-            container={"shoe-container-one-item"}
-            handleInputEditItem={this.handleInputEditItem}
-          />
-          <h4>{description}</h4>
-        </Route>
-      );
-    });
-  };
-
-  render() {
-    if (this.state.isSpinner) {
-      return (
-        <>
-          <BrowserRouter>
-            <NavBar />
-          </BrowserRouter>
-          <Spinner />
-        </>
-      );
-    } else {
-      return (
-        <BrowserRouter>
-          <NavBar />
-          {/* <Switch> */}
-          {this.state.isSpinner && <Spinner />}
-          <Route path={"/"} exact>
-            <h1 style={{ textAlign: "center" }}>Brand New</h1>
-            <div className="store-container">{this.drawItems(false)}</div>
-          </Route>
-          <Route path={"/update"} exact>
-            <h1 style={{ textAlign: "center", margin: "2rem" }}>Store Update</h1>
-            <AddNewItem addNewItem={this.addNewProduct} />
-            <div className="store-container-update">{this.drawItems(true)}</div>
-          </Route>
-
-          <div className="shoe-container-one-item">{this.drawOneItem()}</div>
-
-          {/* </Switch> */}
-        </BrowserRouter>
-      );
-    }
-  }
+  return (
+    <loginContext.Provider value={logInObj}>
+      <NavBar userName={user.name} />
+      {isLoading && <Spinner />}
+      <LoginForm />
+      {isError && <Error error={errorGeneral} />}
+    </loginContext.Provider>
+  );
 }

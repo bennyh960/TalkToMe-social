@@ -1,0 +1,10 @@
+.error-pop {
+  width: 25rem;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: bisque;
+  border: 1px solid red;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}

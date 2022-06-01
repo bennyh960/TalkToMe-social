@@ -2,8 +2,11 @@
   display: flex;
   justify-content: space-around;
   font-size: 1.5rem;
-  background-color: gold;
+  background-color: #5379cc;
   margin-bottom: 2rem;
+  /* padding-bottom: 2rem; */
+  height: 12vh;
+  align-items: center;
 }
 
 a {
@@ -24,4 +27,9 @@ a {
   align-items: center;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: bold;
+}
+
+.small-font {
+  font-size: smaller;
+  color: rgb(58, 58, 58);
 }
