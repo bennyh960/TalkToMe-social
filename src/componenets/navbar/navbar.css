@@ -1,12 +1,18 @@
 .navbar {
+  width: 100vw;
+  height: 15vh;
   display: flex;
   justify-content: space-around;
   font-size: 1.5rem;
-  background-color: #5379cc;
-  margin-bottom: 2rem;
-  /* padding-bottom: 2rem; */
-  height: 12vh;
+  background-color: #64dcdc;
+  background-image: url("./socialbg.jpg");
+  /* background-image: url("https://st4.depositphotos.com/1006328/29275/v/1600/depositphotos_292756792-stock-illustration-dancing-old-people-happy-aged.jpg"); */
   align-items: center;
+  /* background-size: contain; */
+  /* background-clip: content-box; */
+  background-repeat: no-repeat;
+  /* background-size: 60vw 15vh; */
+  /* border: 1px solid black; */
 }
 
 a {

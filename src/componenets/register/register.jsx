@@ -1,37 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./login.css";
-import logo from "../../assets/images/logo.png";
+import React, { useContext, useState } from "react";
+import "./register.css";
 import { loginContext } from "../../App";
 
-export default function LoginForm() {
-  const [isRemmberUser, setRemmberUser] = useState(false);
+export default function RegisterForm() {
+  const [displayLogin, setDisplayLogin] = useState(true);
   const [details, setDetails] = useState({ name: "", email: "", password: "" });
-  const [errorLogin, setLoginError] = useState("");
-  const { users, user, setUser, isLogedIn, setIsLogedIn, displayLogin, setDisplayLogin } = useContext(loginContext);
+  const [error, setError] = useState("");
+  const { users, user, setUser, isLogedIn, setIsLogedIn } = useContext(loginContext);
 
-  useEffect(() => {
-    const checkOnLocalUser = localStorage.getItem("user");
-    if (checkOnLocalUser) {
-      setUser(JSON.parse(checkOnLocalUser));
-      setIsLogedIn(true);
-    }
-    // console.log(checkOnLocalUser.email);
-  }, []);
-
-  const LogIn = ({ email, password }) => {
-    users.forEach((userIdx) => {
-      if (email === userIdx.email && password === userIdx.password) {
+  const LogIn = ({ name, email, password }) => {
+    users.forEach((user) => {
+      if (email === user.email && password === user.password) {
         console.log("loged in");
-        setUser(userIdx);
+        setUser({ name, email, password });
         setIsLogedIn(true);
-        console.log(userIdx);
       }
     });
-
-    if (!user) {
-      setLoginError("Wrong Detailes");
+    if (user.email === "") {
+      setError("Wrong Detailes");
       setTimeout(() => {
-        setLoginError("");
+        setError("");
       }, 1000);
     }
   };
@@ -39,15 +27,7 @@ export default function LoginForm() {
   function submitHandler(e) {
     e.preventDefault();
     LogIn(details);
-    setDetails({ name: "", email: "", password: "" });
   }
-
-  function remmberUserOnLocalStorage() {
-    console.log("set user at local storage");
-    localStorage.setItem("user", JSON.stringify(user));
-  }
-
-  isRemmberUser && isLogedIn && remmberUserOnLocalStorage();
 
   if (!displayLogin || isLogedIn) {
     return <div></div>;
@@ -57,11 +37,19 @@ export default function LoginForm() {
       <div className="form-title">
         <div className="draw-x" onClick={() => setDisplayLogin(false)}></div>
         <div>Login Website</div>
-        <img src={logo} alt="logo" className="logo" />
+        <img src="./logo192.png" alt="logo" className="logo" />
       </div>
       <form className="form-container" onSubmit={(e) => submitHandler(e)}>
-        {errorLogin === "" ? <h2>Login</h2> : <h2>{errorLogin}</h2>}
-
+        {error === "" ? <h2>Login</h2> : <h3>{error}</h3>}
+        <div className="form-input">
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            value={details.name}
+            onChange={(e) => setDetails({ ...details, name: e.target.value })}
+          />
+        </div>
         <div className="form-input">
           <label htmlFor="email">Email:</label>
           <input
@@ -84,14 +72,10 @@ export default function LoginForm() {
           <input
             type="checkbox"
             id="remmberUser"
-            checked={isRemmberUser}
             // value={details.password}
-            onChange={(e) => {
-              setRemmberUser((prev) => !prev);
-              // console.dir(e.target.value);
-            }}
+            // onChange={(e) => setDetails({ ...details, password: e.target.value })}
           />
-          <label>Remmber me.</label>
+          <label>Remmber me:</label>
         </div>
         <button className="login-btn">Login</button>
       </form>

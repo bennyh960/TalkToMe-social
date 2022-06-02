@@ -1,32 +1,36 @@
 import React, { Component, useEffect, useState } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import usersAPI from "./api/usersAPI";
 import "./App.css";
 import NavBar from "./componenets/navbar/navbar";
 import Spinner from "./componenets/spinner/spinner";
 import LoginForm from "./componenets/login/login";
 import Error from "./componenets/error/error";
+import Navbarsec from "./componenets/navBarSecondary/navbarsec";
+import RegisterForm from "./componenets/register/register";
+import Person from "./componenets/person/person";
 
 export const loginContext = React.createContext();
 
 export default function App() {
   // * Utils Variables
-  const [isLoading, setIsLOading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorGeneral, setErrorGeneral] = useState("");
 
   // * Login variables
   const ADMIN = { email: "bennyh960@gmail.com", password: "123", name: "ADMIN" };
   const [users, setUsers] = useState([ADMIN]);
+  const [displayLogin, setDisplayLogin] = useState(true);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         // throw new Error();
-        setIsLOading(true);
+        setIsLoading(true);
         const { data } = await usersAPI.get();
         setUsers([ADMIN, ...data]);
-        setIsLOading(false);
+        setIsLoading(false);
       } catch (error) {
         setIsError(true);
         setErrorGeneral(error.massage);
@@ -44,14 +48,31 @@ export default function App() {
     setUser,
     isLogedIn,
     setIsLogedIn,
+    displayLogin,
+    setDisplayLogin,
   };
 
+  // !TEST PURPOSE ONLY
+  // useEffect(() => {
+  //   console.log(user);
+  // });
+
   return (
-    <loginContext.Provider value={logInObj}>
-      <NavBar userName={user.name} />
-      {isLoading && <Spinner />}
-      <LoginForm />
-      {isError && <Error error={errorGeneral} />}
-    </loginContext.Provider>
+    <>
+      <Router>
+        <loginContext.Provider value={logInObj}>
+          <NavBar userName={user} />
+          <Navbarsec />
+          {isLoading && <Spinner />}
+          {/* {localStorage.getItem(user) === "" && <LoginForm />} */}
+          <LoginForm />
+          {/* <RegisterForm /> */}
+          {isError && <Error error={errorGeneral} />}
+          <Route path={"/users/" + user.name} exact>
+            <Person />
+          </Route>
+        </loginContext.Provider>
+      </Router>
+    </>
   );
 }
