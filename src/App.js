@@ -9,6 +9,7 @@ import Error from "./componenets/error/error";
 import Navbarsec from "./componenets/navBarSecondary/navbarsec";
 import RegisterForm from "./componenets/register/register";
 import Person from "./componenets/person/person";
+// import { data } from "./draft/draft";
 
 export const loginContext = React.createContext();
 
@@ -37,6 +38,7 @@ export default function App() {
       }
     };
     fetchUsers();
+    // console.log(data);
   }, []);
 
   const [user, setUser] = useState({ name: "", email: "", password: "" });
@@ -61,7 +63,7 @@ export default function App() {
     <>
       <Router>
         <loginContext.Provider value={logInObj}>
-          <NavBar userName={user} />
+          <NavBar user={user} />
           <Navbarsec />
           {isLoading && <Spinner />}
           {/* {localStorage.getItem(user) === "" && <LoginForm />} */}

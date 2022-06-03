@@ -2,7 +2,7 @@
   width: 100vw;
   height: 15vh;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   font-size: 1.5rem;
   background-color: #64dcdc;
   background-image: url("./socialbg.jpg");
@@ -21,11 +21,13 @@ a {
 
 .navbar-links {
   display: flex;
-  width: 50%;
+  flex-direction: column;
+  width: 20%;
   height: 3rem;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   font-weight: bold;
+  /* border: 1px solid red; */
 }
 
 .logo {
@@ -38,4 +40,11 @@ a {
 .small-font {
   font-size: smaller;
   color: rgb(58, 58, 58);
+}
+
+.profile-img-navbar {
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  border: 2px solid blue;
 }

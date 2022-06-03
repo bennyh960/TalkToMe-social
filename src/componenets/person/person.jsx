@@ -20,6 +20,7 @@ export default function Person() {
     areaOfIntrest,
   } = user;
   //   console.log(user);
+
   return (
     <div>
       <div>hello {userName}</div>
