@@ -3,7 +3,7 @@ import "./navbarsec.css";
 import { Link } from "react-router-dom";
 import { loginContext } from "../../App";
 
-export default function Navbarsec() {
+export default function Navbarsec(props) {
   const { user, setDisplayLogin, setUser, setIsLogedIn } = useContext(loginContext);
 
   function handleLoginBtn() {
@@ -28,7 +28,7 @@ export default function Navbarsec() {
             <button onClick={handleLoginBtn}>Login</button>
           </li>
           <li>
-            <button>Register</button>
+            <button onClick={props.handleRegisterBtn}>Register</button>
           </li>
         </>
       );
@@ -75,6 +75,9 @@ export default function Navbarsec() {
             <a href="#">Contact</a>
           </li>
         </ul>
+        <div className="welcome-user-secnav">
+          Welcome <span className="small-font">{user === "" || user.name === "" ? "Guest" : user.name}</span>
+        </div>
       </nav>
     </>
   );

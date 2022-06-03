@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 // import { Link } from "react-router-dom";
 import { loginContext } from "../../App";
 import "./person.css";
+import ChatMassanger from "../chat/chat";
+// todo delete this import
 
 export default function Person() {
   const { user } = useContext(loginContext);
@@ -18,6 +20,7 @@ export default function Person() {
     background,
     jobTitle,
     areaOfIntrest,
+    massenger,
   } = user;
   //   console.log(user);
 
@@ -29,6 +32,7 @@ export default function Person() {
       <p>About Me:{aboutMe}</p>
       <p>Age: {age}</p>
       <img src={photoProfile} alt={userName} />
+      <ChatMassanger massenger={massenger} user={user} />
     </div>
   );
 }
