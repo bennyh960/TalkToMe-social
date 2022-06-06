@@ -1,85 +1,107 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./chat.css";
-// import { loginContext } from "../../App";
 import usersAPI from "../../api/usersAPI";
 import Loader1 from "../loader/loader";
+import ChatHistory from "./chatHistory";
 
-export default function ChatMassanger({ user, massenger }) {
-  const [error, setError] = useState("");
-  const [msgColor, setMsgColor] = useState("");
+export default function ChatMassanger({ user, users, closeBtn }) {
+  const [rechiverID, setFriendID] = useState("");
+  const [rechiverName, setFriendName] = useState("");
+  const [rechiverImg, setFriendImg] = useState("");
   const [msg, setMsg] = useState("");
-  // const { users, user, setUser, isLogedIn, setIsLogedIn } = useContext(loginContext);
-  // !
 
   const [isLoading, setIsloading] = useState(false);
 
-  const handleNote = (massage, time, color) => {
-    setError(massage);
-    setMsgColor(color);
-    // console.log("test", color);
-    setTimeout(() => {
-      setError("");
-    }, time);
-  };
+  function sendRechiveObj(whoObj, whoKey, otherID) {
+    const timeObj = new Date();
+    const hour = timeObj.getHours();
+    const minutes = timeObj.getMinutes();
+    const timeStr = hour + ":" + minutes;
+    let dayNow = timeObj.toLocaleDateString("en-us", { weekday: "long", month: "long", day: "numeric" });
+
+    if (whoObj.massenger[otherID]) {
+      whoObj.massenger[otherID].push({ [whoKey]: msg, time: timeStr, dayDate: dayNow });
+      console.log("user id:", whoObj.id, "update chat user id:", otherID);
+    } else {
+      whoObj.massenger[otherID] = [{ [whoKey]: msg, time: timeStr, dayDate: dayNow }];
+      console.log("user id:", whoObj.id, "create chat with user id:", otherID);
+    }
+  }
 
   //* Put request
-  const updateChatMassanger = async (friendObj, senderID) => {
-    // setIsloading((prev) => !prev);
-    const updatedFreindObj = { friendObj, massenger: [...massenger, { senderID, msg }] };
-    try {
-      await usersAPI.put(`/${friendObj.id}`, updatedFreindObj);
+  const updateChatMassanger = async (user, friendID) => {
+    const friendObj = users.find((friend) => friend.id === friendID);
+    setFriendImg(friendObj.photoProfile);
+    setFriendName(friendObj.name + " " + friendObj.lastName);
 
-      //   setIsloading((prev) => !prev);
+    sendRechiveObj(user, "me", friendObj.id);
+    sendRechiveObj(friendObj, "him", user.id);
+
+    const massenger = { massenger: { ...user.massenger, [friendObj.id]: [...user.massenger[friendObj.id]] } };
+    const massengerRechiver = { massenger: { ...friendObj.massenger, [user.id]: [...friendObj.massenger[user.id]] } };
+    try {
+      await usersAPI.put(`/${user.id}`, massenger);
+      await usersAPI.put(`/${friendObj.id}`, massengerRechiver);
+
       //* update UI
     } catch (error) {
       console.log("Post Error:", error);
-      //   setIsloading((prev) => !prev);
     }
   };
 
-  //   useEffect(() => {
-  //     updateChatMassanger(user, user.id);
-  //   });
   function submitHandler(e) {
     e.preventDefault();
-    updateChatMassanger(user, user.id);
+    // console.log(typeof rechiverID);
+    updateChatMassanger(user, rechiverID);
+    setMsg("");
+  }
+
+  function handleFriendChatClickPPP(id) {
+    setFriendID((p) => id);
+    updateChatMassanger(user, id);
   }
 
   return (
-    <form onSubmit={(e) => submitHandler(e)}>
-      <label>user</label>
-      <input
-        type="text"
-        value={msg}
-        onChange={(e) => {
-          setMsg((p) => e.target.value);
-        }}
-      />
-    </form>
+    <div className="chat-massanger">
+      <form onSubmit={(e) => submitHandler(e)} className="chat-form">
+        <div className="close-chat-btn-container">
+          <label>friend ID:</label>
+          <div className="close-chat-btn" onClick={closeBtn}>
+            X
+          </div>
+        </div>
+        <input
+          type="text"
+          value={rechiverID}
+          name="id"
+          onChange={(e) => {
+            setFriendID((p) => e.target.value);
+          }}
+        />
+        <ChatHistory
+          history={user.massenger[rechiverID]}
+          rechiverID={rechiverID}
+          rechiverImg={rechiverImg}
+          rechiverName={rechiverName}
+          friendsIDarray={Object.keys(user.massenger)}
+          users={users}
+          user={user}
+          handleFriendChatClickPP={handleFriendChatClickPPP}
+        />
+        <div className="chat-msg-input-field">
+          <input
+            type="text"
+            placeholder="Print Your Massage"
+            className="massage-input"
+            value={msg}
+            name="msg"
+            onChange={(e) => {
+              setMsg((p) => e.target.value);
+            }}
+          />
+          <input type="submit" value="Send" id="submitMsg" />
+        </div>
+      </form>
+    </div>
   );
 }
-
-//   //* PUT request
-//   handleEdit = async (id, name, brand, price, description, image) => {
-//     this.setState({ isSpinner: true });
-//     const findItemObjectToUpdate = this.state.storeData.find((item) => item.id === id);
-//     const updatedItem = { ...findItemObjectToUpdate, name: name, brand, price, description, image };
-
-//     try {
-//       const { data } = await storeAPI.put(`/${id}`, updatedItem);
-// * Update UI
-//       this.setState((prev) => {
-//         return {
-//           storeData: prev.storeData.map((item) => {
-//             if (item.id === id) {
-//               return data;
-//             }
-//             return item;
-//           }),
-//           isSpinner: !prev.isSpinner,
-//         };
-//       });
-//     } catch (error) {
-//       console.log("Error PUT request:", error);
-//     }
-//   };

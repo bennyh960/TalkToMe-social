@@ -26,6 +26,7 @@ export default function App() {
     password: "123",
     name: "ADMIN",
     photoProfile: adminPic,
+    id: "0",
   };
   const [users, setUsers] = useState([ADMIN]);
   const [displayLogin, setDisplayLogin] = useState(true);
@@ -37,6 +38,7 @@ export default function App() {
         setIsLoading(true);
         const { data } = await usersAPI.get();
         setUsers([ADMIN, ...data]);
+
         setIsLoading(false);
       } catch (error) {
         setIsError(true);

@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./register.css";
 // import { loginContext } from "../../App";
 import usersAPI from "../../api/usersAPI";
 import Loader1 from "../loader/loader";
 
 export default function RegisterForm({ users }) {
+  // console.log(users);
   const [displayRegister, setDisplayRegister] = useState(true);
   // const [details, setDetails] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState("");

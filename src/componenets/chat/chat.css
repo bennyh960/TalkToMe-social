@@ -1,0 +1,57 @@
+.chat-massanger {
+  position: absolute;
+  top: -7rem;
+  width: 80%;
+  /* height: 80vh; */
+  margin: 0 10rem;
+  /* background-color: bisque; */
+  background-image: url("../../assets/images/chatBG.jpg");
+}
+.chat-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* margin: 0 0 0 5vw; */
+  margin: auto;
+  flex-wrap: nowrap;
+  border: 1px solid black;
+  /* position: absolute;
+  top: 0; */
+}
+
+.chat-msg-input-field {
+  display: flex;
+  margin-top: 0.5rem;
+  /* border: 1px solid red; */
+}
+.massage-input {
+  flex: 2;
+  /* width: 93%; */
+  padding: 0.5rem 0;
+}
+
+#submitMsg {
+  /* padding: 0.1rem 0; */
+  cursor: pointer;
+  /* height: 100%; */
+}
+
+.close-chat-btn-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-chat-btn {
+  /* margin-right: 0.5rem; */
+  border: 1px solid white;
+  padding: 0.2rem;
+  background-color: black;
+  cursor: pointer;
+  color: white;
+}
+
+.close-chat-btn:hover {
+  border-color: black;
+  color: black;
+  background-color: white;
+}

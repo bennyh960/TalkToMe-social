@@ -1,0 +1,29 @@
+.chat-friends-view-container {
+  height: 100%;
+  width: 25%;
+  background-color: aqua;
+  overflow: scroll;
+}
+
+.friend-container {
+  width: 99%;
+  height: 5rem;
+  margin: 0.5rem auto;
+  height: 5rem;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.freind-img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.friend-name {
+  font-weight: bolder;
+}

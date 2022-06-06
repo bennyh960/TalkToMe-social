@@ -1,0 +1,22 @@
+.personal-page-container {
+  position: relative;
+}
+.personal-detailes-container {
+  display: flex;
+  /* flex-direction: column; */
+  border: 1px solid green;
+  /* position: relative; */
+}
+
+.description-personal-details > div {
+  margin: 0.5rem;
+}
+.user-large-photo {
+  width: 50vw;
+  height: 65vh;
+  margin: 0 0.5rem;
+}
+
+.bold-text {
+  font-weight: bolder;
+}
