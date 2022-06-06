@@ -23,7 +23,7 @@ export default function ChatHistory({
 
   useEffect(() => {
     scrollToBottom();
-    console.log("x");
+    // console.log("scroll bottom");
   });
 
   const printHistoryChat = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./chatFreindsView.css";
 
 export default function ChatFriendsView({ user, users, handleFriendChatClickP }) {
@@ -14,16 +14,31 @@ export default function ChatFriendsView({ user, users, handleFriendChatClickP })
   const friends = findFriends();
 
   //   todo: add last massage from friend in friends view like whatsap
-  function findLastMassageIndex(arr) {
-    const lastIdx = arr.findLastIndex((n) => n === "him");
-    console.log(lastIdx);
-  }
+  //   function findLastMassageIndex(arr) {
+  //     const lastIdx = arr.findLastIndex((n) => n === "him");
+  //     console.log(lastIdx);
+  //   }
+
+  //   function findLastIndex(array, searchKey, searchValue) {
+  //     const index = array
+  //       .slice()
+  //       .reverse()
+  //       .findIndex((x) => x[searchKey] === searchValue);
+  //     const count = array.length - 1;
+  //     const finalIndex = index >= 0 ? count - index : index;
+  //     console.log(finalIndex, index);
+  //     return finalIndex;
+  //   }
 
   function handleFriendChatClick(friendID) {
     handleFriendChatClickP(friendID);
   }
   function drawFriendsInChatWindow() {
     return friends.map((friend) => {
+      //   console.log();
+      const lastMsgFriendSent = friend.massenger[user.id].findLastIndex((e) => e["me"]);
+      const lastMsgFriendRechive = friend.massenger[user.id].findLastIndex((e) => e["him"]);
+      console.log(lastMsgFriendRechive - lastMsgFriendSent);
       return (
         <div className="friend-container" key={friend.id} onClick={(e) => handleFriendChatClick(friend.id)}>
           <div>

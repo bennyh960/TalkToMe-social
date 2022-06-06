@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./chat.css";
 import usersAPI from "../../api/usersAPI";
-import Loader1 from "../loader/loader";
+// import Loader1 from "../loader/loader";
 import ChatHistory from "./chatHistory";
 
 export default function ChatMassanger({ user, users, closeBtn }) {
@@ -10,7 +10,7 @@ export default function ChatMassanger({ user, users, closeBtn }) {
   const [rechiverImg, setFriendImg] = useState("");
   const [msg, setMsg] = useState("");
 
-  const [isLoading, setIsloading] = useState(false);
+  // const [isLoading, setIsloading] = useState(false);
 
   function sendRechiveObj(whoObj, whoKey, otherID) {
     const timeObj = new Date();
@@ -65,7 +65,7 @@ export default function ChatMassanger({ user, users, closeBtn }) {
     <div className="chat-massanger">
       <form onSubmit={(e) => submitHandler(e)} className="chat-form">
         <div className="close-chat-btn-container">
-          <label>friend ID:</label>
+          <label style={{ padding: "3px" }}>friend ID:</label>
           <div className="close-chat-btn" onClick={closeBtn}>
             X
           </div>
