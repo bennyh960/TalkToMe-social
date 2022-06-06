@@ -10,6 +10,7 @@ export default function ChatHistory({
   handleFriendChatClickPP,
   users,
   user,
+  setUnreadMsg,
 }) {
   //   const checkNewDate = ()=>{
   //       history.m
@@ -61,7 +62,12 @@ export default function ChatHistory({
         </div>
         {printHistoryChat()}
       </div>
-      <ChatFriendsView users={users} user={user} handleFriendChatClickP={handleFriendChatClickPP} />
+      <ChatFriendsView
+        users={users}
+        user={user}
+        handleFriendChatClickP={handleFriendChatClickPP}
+        setUnreadMsg={setUnreadMsg}
+      />
     </div>
   );
 }

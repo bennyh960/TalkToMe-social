@@ -4,7 +4,7 @@ import usersAPI from "../../api/usersAPI";
 // import Loader1 from "../loader/loader";
 import ChatHistory from "./chatHistory";
 
-export default function ChatMassanger({ user, users, closeBtn }) {
+export default function ChatMassanger({ user, users, closeBtn, setUnreadMsg }) {
   const [rechiverID, setFriendID] = useState("");
   const [rechiverName, setFriendName] = useState("");
   const [rechiverImg, setFriendImg] = useState("");
@@ -58,7 +58,7 @@ export default function ChatMassanger({ user, users, closeBtn }) {
 
   function handleFriendChatClickPPP(id) {
     setFriendID((p) => id);
-    updateChatMassanger(user, id);
+    // updateChatMassanger(user, id);
   }
 
   return (
@@ -87,6 +87,7 @@ export default function ChatMassanger({ user, users, closeBtn }) {
           users={users}
           user={user}
           handleFriendChatClickPP={handleFriendChatClickPPP}
+          setUnreadMsg={setUnreadMsg}
         />
         <div className="chat-msg-input-field">
           <input

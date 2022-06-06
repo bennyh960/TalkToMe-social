@@ -26,4 +26,25 @@
 
 .friend-name {
   font-weight: bolder;
+  display: flex;
+  justify-content: space-around;
+}
+
+.new-msg-from-friend {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background-color: rgb(39, 239, 55);
+  color: white;
+  text-align: center;
+}
+
+.last-massage {
+  display: flex;
+  font-size: smaller;
+  /* justify-content: space-evenly; */
+}
+
+.last-massage > div {
+  margin: 0 0.3rem;
 }

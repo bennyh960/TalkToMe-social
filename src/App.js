@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import usersAPI from "./api/usersAPI";
 import "./App.css";
@@ -19,6 +19,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorGeneral, setErrorGeneral] = useState("");
+  const [unreadMsg, setUnreadMsg] = useState(0);
 
   // * Login variables
   const ADMIN = {
@@ -47,6 +48,7 @@ export default function App() {
     };
     fetchUsers();
     // console.log(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [user, setUser] = useState({ name: "", email: "", password: "" });
@@ -61,6 +63,7 @@ export default function App() {
     setIsLogedIn,
     displayLogin,
     setDisplayLogin,
+    setUnreadMsg,
   };
 
   // !TEST PURPOSE ONLY
@@ -76,7 +79,7 @@ export default function App() {
       <Router>
         <loginContext.Provider value={logInObj}>
           {/* {console.log(users)} */}
-          <NavBar user={user} />
+          <NavBar user={user} unreadMsg={unreadMsg} />
           <Navbarsec handleRegisterBtn={handleRegisterBtn} />
           {isLoading && <Spinner />}
 

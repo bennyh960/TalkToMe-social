@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./chatFreindsView.css";
 
-export default function ChatFriendsView({ user, users, handleFriendChatClickP }) {
+export default function ChatFriendsView({ user, users, handleFriendChatClickP, setUnreadMsg }) {
   //   const [friendsArray, setFriendsArray] = useState([]);
+  //   const [totalUnreadMsg, setTotalUnreadMsg] = useState(0);
+
+  const totalUnreadMsg = useRef(0);
+
   function findFriends() {
     const userFreindsList = Object.keys(user.massenger);
+    console.log("user friend list:", userFreindsList);
     const friends = userFreindsList.map((friendID) => {
       return users.find((user) => user.id === friendID);
     });
@@ -19,42 +24,38 @@ export default function ChatFriendsView({ user, users, handleFriendChatClickP })
   //     console.log(lastIdx);
   //   }
 
-  //   function findLastIndex(array, searchKey, searchValue) {
-  //     const index = array
-  //       .slice()
-  //       .reverse()
-  //       .findIndex((x) => x[searchKey] === searchValue);
-  //     const count = array.length - 1;
-  //     const finalIndex = index >= 0 ? count - index : index;
-  //     console.log(finalIndex, index);
-  //     return finalIndex;
-  //   }
-
   function handleFriendChatClick(friendID) {
     handleFriendChatClickP(friendID);
   }
   function drawFriendsInChatWindow() {
     return friends.map((friend) => {
-      //   console.log();
       const lastMsgFriendSent = friend.massenger[user.id].findLastIndex((e) => e["me"]);
       const lastMsgFriendRechive = friend.massenger[user.id].findLastIndex((e) => e["him"]);
-      console.log(lastMsgFriendRechive - lastMsgFriendSent);
+      const totalNewMsgFriendSent = friend.massenger[user.id].length - lastMsgFriendRechive;
+      //   setTotalUnreadMsg((p) => p + totalNewMsgFriendSent - 1);
+      totalUnreadMsg.current += totalNewMsgFriendSent - 1;
       return (
         <div className="friend-container" key={friend.id} onClick={(e) => handleFriendChatClick(friend.id)}>
           <div>
             <img src={friend.photoProfile} alt="" className="freind-img" />
           </div>
           <div>
-            <div className="friend-name">{friend.name + " " + friend.lastName}</div>
+            <div className="friend-name">
+              {friend.name + " " + friend.lastName}
+              {totalNewMsgFriendSent - 1 > 0 && <div className="new-msg-from-friend">{totalNewMsgFriendSent - 1}</div>}
+            </div>
             <div className="last-massage">
-              {/* {friend.massenger[user.id][friend.massenger[user.id].findLastIndex((n) => n === "him")].me} */}
-              {/* {findLastMassageIndex(friend.massenger[user.id])} */}
+              <div>{lastMsgFriendSent > 0 && friend.massenger[user.id][lastMsgFriendSent].time}</div>
+              <div>{lastMsgFriendSent > 0 && friend.massenger[user.id][lastMsgFriendSent].me}</div>
             </div>
           </div>
         </div>
       );
     });
   }
-
+  console.log(totalUnreadMsg, "totalunread msg");
+  //   setUnreadMsg(totalUnreadMsg);
+  console.log(setUnreadMsg);
+  totalUnreadMsg.current = 0;
   return <div className="chat-friends-view-container">{drawFriendsInChatWindow()}</div>;
 }

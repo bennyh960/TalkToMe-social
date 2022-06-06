@@ -49,6 +49,7 @@
 
 .dropdown {
   position: relative;
+  z-index: 100;
 }
 
 .dd-title {
@@ -110,13 +111,17 @@
 #container-secondary-navbar > ul > li > div > ul > li > *,
 .btn-secondary {
   border: none;
-  cursor: pointer;
   background-color: transparent;
   color: black;
+  /* color: red; */
   font-size: 1rem;
 }
 
 #user-account {
+  cursor: pointer;
   font-weight: bold;
   color: black;
+}
+#user-account:hover {
+  background-color: #0088ff;
 }

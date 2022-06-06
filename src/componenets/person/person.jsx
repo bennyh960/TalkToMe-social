@@ -10,7 +10,7 @@ import ChatMassanger from "../chat/chat";
 
 export default function Person() {
   const [showChat, setShowChat] = useState(false);
-  const { user, users } = useContext(loginContext);
+  const { user, users, setUnreadMsg } = useContext(loginContext);
   const {
     name,
     lastName,
@@ -23,10 +23,12 @@ export default function Person() {
     country,
     background,
     jobTitle,
+
     // areaOfIntrest,
     // massenger,
   } = user;
   //   console.log(user);
+  // console.log(setUnreadMsg);
 
   return (
     <div className="personal-page-container">
@@ -71,7 +73,9 @@ export default function Person() {
         </button>
       </div>
 
-      {showChat && <ChatMassanger user={user} users={users} closeBtn={() => setShowChat((p) => !p)} />}
+      {showChat && (
+        <ChatMassanger setUnreadMsg={setUnreadMsg} user={user} users={users} closeBtn={() => setShowChat((p) => !p)} />
+      )}
     </div>
   );
 }

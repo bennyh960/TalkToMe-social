@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 
-export default function NavBar({ user }) {
+export default function NavBar({ user, unreadMsg }) {
   // console.log(user);
   return (
     <div className="navbar">
@@ -20,7 +20,7 @@ export default function NavBar({ user }) {
           </Link>
           <div className="notification">
             <FontAwesomeIcon icon={faBell} className="bell-icon" />
-            <div className="notification-num">+3</div>
+            {unreadMsg > 0 && <div className="notification-num">+{unreadMsg}</div>}
           </div>
         </div>
       )}
