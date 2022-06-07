@@ -59,6 +59,7 @@ a {
   align-items: center;
   border-radius: 50%;
   position: relative;
+  cursor: pointer;
 }
 
 .notification-num {

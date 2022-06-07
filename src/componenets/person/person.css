@@ -20,3 +20,42 @@
 .bold-text {
   font-weight: bolder;
 }
+
+.person-one-data {
+  display: flex;
+  /* border: 1px solid black; */
+  justify-content: space-between;
+}
+
+.person-one-data button {
+  width: fit-content;
+  height: 2rem;
+  margin-left: 2rem;
+}
+
+.edit-btn-icon {
+  position: relative;
+  /* border: 1px solid black; */
+  /* top: 0; */
+}
+
+.show-data-over {
+  position: absolute;
+  background: rgba(50, 50, 50);
+  border-radius: 2px;
+  padding: 3px 8px;
+  color: white;
+  left: 40%;
+}
+
+.show-data-over::after {
+  content: "";
+  position: absolute;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: rgba(50, 50, 50);
+  /* background: red; */
+  transform: rotate(45deg);
+  top: 0.5rem;
+  right: -0.3rem;
+}

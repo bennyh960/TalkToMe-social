@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./navbar.css";
 import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
+import DrawTheUnreadMassage from "./totalUnreadMsg";
 
-export default function NavBar({ user, unreadMsg }) {
-  // console.log(user);
+export default function NavBar({ user, unreadMsg, users }) {
+  const [showUnreadMsg, setShowUnread] = useState(false);
+
   return (
     <div className="navbar">
       <div className="logo">
@@ -18,10 +20,15 @@ export default function NavBar({ user, unreadMsg }) {
           <Link to={"/users/" + user.name}>
             <img src={user.photoProfile} alt="profile avatar navbar" className="profile-img-navbar" />
           </Link>
-          <div className="notification">
+          <div
+            className="notification"
+            onMouseOver={() => setShowUnread(true)}
+            onMouseLeave={() => setShowUnread(false)}
+          >
             <FontAwesomeIcon icon={faBell} className="bell-icon" />
-            {unreadMsg > 0 && <div className="notification-num">+{unreadMsg}</div>}
+            {unreadMsg.current > 0 && <div className="notification-num">+{unreadMsg.current}</div>}
           </div>
+          {showUnreadMsg && <DrawTheUnreadMassage user={user} users={users} />}
         </div>
       )}
     </div>

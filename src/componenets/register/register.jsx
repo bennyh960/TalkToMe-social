@@ -3,23 +3,22 @@ import "./register.css";
 // import { loginContext } from "../../App";
 import usersAPI from "../../api/usersAPI";
 import Loader1 from "../loader/loader";
+import PasswordMeter from "./passMeter";
 
 export default function RegisterForm({ users }) {
-  // console.log(users);
   const [displayRegister, setDisplayRegister] = useState(true);
-  // const [details, setDetails] = useState({ name: "", email: "", password: "" });
+
   const [error, setError] = useState("");
   const [msgColor, setMsgColor] = useState("");
-  // const { users, user, setUser, isLogedIn, setIsLogedIn } = useContext(loginContext);
-  // !
+
   const [newUserLogin, setNewUserLogin] = useState({ email: "", password: "" });
   const [confirmPassword, setconfirmPassword] = useState("");
+  const [passwordType, setPasswordType] = useState("password");
   const [isLoading, setIsloading] = useState(false);
 
   const handleNote = (massage, time, color) => {
     setError(massage);
     setMsgColor(color);
-    // console.log("test", color);
     setTimeout(() => {
       setError("");
     }, time);
@@ -55,14 +54,20 @@ export default function RegisterForm({ users }) {
         setDisplayRegister(false);
       }, 2000);
       // todo consider to add email verification link
-      // this.setState((prev) => {
-      //   return { storeData: [...prev.storeData, NewProduct.data], isSpinner: !prev.isSpinner };
-      // });
     } catch (error) {
       console.log("Post Error:", error);
       setIsloading((prev) => !prev);
     }
   };
+
+  //* show/hide password
+  function togglePasswordType() {
+    if (passwordType === "password") {
+      setPasswordType("text");
+    } else {
+      setPasswordType("password");
+    }
+  }
 
   if (!displayRegister) {
     return <div></div>;
@@ -76,7 +81,6 @@ export default function RegisterForm({ users }) {
       </div>
       <form className="form-container" onSubmit={(e) => submitHandler(e)}>
         {error === "" ? <h2>Sign Up</h2> : <h3 style={{ color: msgColor }}>{error}</h3>}
-
         <div className="form-input">
           <label htmlFor="email">Email:</label>
           <input
@@ -84,27 +88,33 @@ export default function RegisterForm({ users }) {
             id="email"
             value={newUserLogin.email}
             onChange={(e) => setNewUserLogin({ ...newUserLogin, email: e.target.value })}
+            required
           />
         </div>
         <div className="form-input">
           <label htmlFor="password">Password:</label>
           <input
-            type="password"
+            type={passwordType}
             id="password"
             value={newUserLogin.password}
             onChange={(e) => setNewUserLogin({ ...newUserLogin, password: e.target.value })}
+            required
           />
         </div>
         <div className="form-input">
           <label htmlFor="password">Confirm Password:</label>
           <input
-            type="password"
+            type={passwordType}
             id="confirmed-password"
             value={confirmPassword}
             onChange={(e) => setconfirmPassword(e.target.value)}
+            required
           />
         </div>
-
+        <div>
+          <input type="checkbox" onClick={togglePasswordType} /> Show Password
+        </div>
+        <PasswordMeter password={newUserLogin.password} />
         <button className="login-btn">Sign in</button>
         {isLoading && <Loader1 />}
       </form>

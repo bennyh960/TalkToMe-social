@@ -11,6 +11,7 @@ import RegisterForm from "./componenets/register/register";
 import Person from "./componenets/person/person";
 // import { data } from "./draft/draft";
 import adminPic from "./assets/images/admin_key.png";
+import Home from "./componenets/home/home";
 
 export const loginContext = React.createContext();
 
@@ -33,6 +34,10 @@ export default function App() {
   const [displayLogin, setDisplayLogin] = useState(true);
 
   useEffect(() => {
+    console.log("update unread massages");
+  }, [unreadMsg]);
+
+  useEffect(() => {
     const fetchUsers = async () => {
       try {
         // throw new Error();
@@ -47,7 +52,7 @@ export default function App() {
       }
     };
     fetchUsers();
-    // console.log(data);
+    // console.log(unreadMsg);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -79,11 +84,13 @@ export default function App() {
       <Router>
         <loginContext.Provider value={logInObj}>
           {/* {console.log(users)} */}
-          <NavBar user={user} unreadMsg={unreadMsg} />
+          <NavBar user={user} unreadMsg={unreadMsg} users={users} />
           <Navbarsec handleRegisterBtn={handleRegisterBtn} />
           {isLoading && <Spinner />}
+          <Route path={"/"} exact>
+            <Home users={users.slice(1)} />
+          </Route>
 
-          {/* {localStorage.getItem(user) === "" && <LoginForm />} */}
           <LoginForm />
           {registerDisplay && <RegisterForm users={users} />}
           {isError && <Error error={errorGeneral} />}

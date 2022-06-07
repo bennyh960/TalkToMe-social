@@ -1,0 +1,16 @@
+.nav-total-unread {
+  color: rgb(68, 67, 67);
+  width: fit-content;
+  font-size: 8px;
+  font-weight: 100;
+  padding: 1rem;
+  border-radius: 1rem;
+  position: absolute;
+  top: 2rem;
+  background-color: rgb(228, 239, 235);
+}
+
+.unread-from-one-friend {
+  border-bottom: 1px solid gray;
+  padding-bottom: 2px;
+}

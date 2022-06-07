@@ -3,13 +3,17 @@ import "./chatFreindsView.css";
 
 export default function ChatFriendsView({ user, users, handleFriendChatClickP, setUnreadMsg }) {
   //   const [friendsArray, setFriendsArray] = useState([]);
-  //   const [totalUnreadMsg, setTotalUnreadMsg] = useState(0);
+  // const [totalUnreadMsgState, setTotalUnreadMsg] = useState(0);
 
   const totalUnreadMsg = useRef(0);
 
+  //   useEffect(() => {
+  //     console.log("update unread massages");
+  //   }, [totalUnreadMsg]);
+
   function findFriends() {
     const userFreindsList = Object.keys(user.massenger);
-    console.log("user friend list:", userFreindsList);
+    // console.log("user friend list:", userFreindsList);
     const friends = userFreindsList.map((friendID) => {
       return users.find((user) => user.id === friendID);
     });
@@ -53,9 +57,11 @@ export default function ChatFriendsView({ user, users, handleFriendChatClickP, s
       );
     });
   }
-  console.log(totalUnreadMsg, "totalunread msg");
-  //   setUnreadMsg(totalUnreadMsg);
-  console.log(setUnreadMsg);
+  //   console.log(totalUnreadMsg.current, "totalunread msg");
+  setTimeout(() => {
+    setUnreadMsg(totalUnreadMsg);
+  }, 100);
+  //   console.log(setUnreadMsg);
   totalUnreadMsg.current = 0;
   return <div className="chat-friends-view-container">{drawFriendsInChatWindow()}</div>;
 }

@@ -1,3 +1,7 @@
+.edit-input-data-form {
+  max-height: 70vh;
+  overflow-y: scroll;
+}
 .pop-up {
   display: flex;
   justify-content: center;
@@ -8,20 +12,27 @@
   width: 100%;
   height: 100vh;
   background-color: rgba(175, 175, 239, 0.452);
+  /* padding: 0 10rem; */
   /* z-index: 100; */
 }
 
+.pop-up-box-border {
+  background-image: linear-gradient(to bottom right, #00ffae, #7848fe);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(73, 69, 69, 0.4);
+  box-shadow: 0 0 5px 2px #fff;
+  padding: 0.5rem;
+}
 .pop-up-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  /* width: 25rem; */
-  /* height: 15rem; */
-  padding: 3rem;
-  border: 2px solid black;
-  background-color: rgb(155, 156, 136);
+  /* overflow-y: scroll; */
+  padding: 3rem 5rem;
+  border: 1px solid black;
+  background-color: aliceblue;
   border-radius: 1rem;
   text-align: center;
 }
@@ -31,5 +42,19 @@
   font-size: 1.5rem;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 2rem;
+}
+.edit-area-big {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
+}
+
+#about-label {
+  align-self: flex-start;
+  padding: 1rem 0;
+  /* justify-self: flex-start; */
 }
