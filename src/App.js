@@ -14,6 +14,7 @@ import adminPic from "./assets/images/admin_key.png";
 import Home from "./componenets/home/home";
 import People from "./componenets/people/people";
 import About from "./componenets/about/about";
+import Search from "./componenets/search/search";
 
 export const loginContext = React.createContext();
 
@@ -99,6 +100,9 @@ export default function App() {
           </Route>
           <Route path={"/about"} exact>
             <About />
+          </Route>
+          <Route path={"/search"} exact>
+            <Search users={users} visitMeFunc={visitMeFunc} />
           </Route>
           <LoginForm />
           {registerDisplay && <RegisterForm users={users} />}

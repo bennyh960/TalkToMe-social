@@ -50,7 +50,7 @@ export default function Navbarsec(props) {
   }
 
   return (
-    <>
+    <div className="sticky-nav">
       <nav id="container-secondary-navbar">
         <ul>
           <li className="dropdown">
@@ -71,6 +71,9 @@ export default function Navbarsec(props) {
             <Link to={"/about"}>About</Link>
           </li>
           <li>
+            <Link to={"/search"}>Search-People</Link>
+          </li>
+          <li>
             <Link to={"/contact"}>Contact</Link>
           </li>
         </ul>
@@ -78,6 +81,6 @@ export default function Navbarsec(props) {
           Welcome <span className="small-font">{user === "" || user.name === "" ? "Guest" : user.name}</span>
         </div>
       </nav>
-    </>
+    </div>
   );
 }

@@ -1,3 +1,8 @@
+.sticky-nav {
+  /* width: 100vw; */
+  /* height: 200vh; */
+  /* position: absolute; */
+}
 #container-secondary-navbar {
   width: 100vw;
   margin-bottom: 3rem;
@@ -7,22 +12,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* position: sticky;
+  top: 0; */
 }
 
 .welcome-user-secnav {
   /* justify-self: flex-end; */
   margin-right: 7rem;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   /* align-self: flex-end; */
 }
 
 #container-secondary-navbar > ul {
   list-style-type: none;
-  width: 40%;
+  width: 55%;
   height: 100%;
   display: flex;
   justify-content: space-around;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 #container-secondary-navbar > ul > li {
   line-height: 2.4rem;
@@ -50,6 +57,7 @@
 .dropdown {
   position: relative;
   z-index: 100;
+  /* border: #0088ff 1px solid; */
 }
 
 .dd-title {
@@ -68,6 +76,8 @@
   min-width: 8rem;
   top: 2.5rem;
   border-radius: 7px;
+  z-index: 110;
+  border: 5px solid violet;
   /* max-height: 5rem; */
   /* margin: 0 1rem; */
 }
@@ -94,6 +104,7 @@
 #container-secondary-navbar > ul > .dropdown:hover > .dd {
   display: block;
   border: 1px solid rgb(92, 97, 92);
+  /* z-index: 100; */
 }
 
 #container-secondary-navbar > ul > li > div > ul {
@@ -132,4 +143,11 @@
 .account {
   color: white;
   font-weight: bold;
+}
+
+.small-font {
+  color: aliceblue;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
 }

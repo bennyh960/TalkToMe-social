@@ -11,10 +11,12 @@ export default function NavBar({ user, unreadMsg, users }) {
 
   return (
     <div className="navbar">
-      <div className="logo">
-        <img src={logo} alt="" height={"35rem"} />
-        TalkToMe.il
-      </div>
+      <Link to={"/about"}>
+        <div className="logo">
+          <img src={logo} alt="" height={"35rem"} />
+          TalkToMe.il
+        </div>
+      </Link>
       {user.email && (
         <div className="navbar-links">
           {/* <Link to={"/users/" + user.name}> */}

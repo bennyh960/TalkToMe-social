@@ -1,0 +1,19 @@
+.search-people-container {
+  display: flex;
+  width: 80vw;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-container {
+  display: flex;
+  margin-bottom: 5rem;
+}
+
+.show-people {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
