@@ -8,13 +8,14 @@ export default function Home({ users }) {
   const [randomIdArr, setRandomIdArr] = useState([]);
 
   useEffect(() => {
-    setRandomIdArr(getRandomArr(10));
+    setRandomIdArr(getRandomArr(users.length));
     const generateInterval = setInterval(() => {
       setRandomIdArr(getRandomArr(10));
     }, 5000);
     return () => {
       clearInterval(generateInterval);
     };
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const generateRandomCards = (users) => {
@@ -23,7 +24,12 @@ export default function Home({ users }) {
       //   console.log(userToShow, id);
       return (
         <React.Fragment key={id}>
-          <PersonCard img={userToShow.photoProfile} name={userToShow.name} />
+          <PersonCard
+            img={userToShow.photoProfile}
+            name={userToShow.name}
+            background={userToShow.background}
+            rating={userToShow.rating}
+          />
         </React.Fragment>
       );
     });

@@ -125,3 +125,8 @@
 #user-account:hover {
   background-color: #0088ff;
 }
+
+.account {
+  color: white;
+  font-weight: bold;
+}

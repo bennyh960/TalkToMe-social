@@ -55,11 +55,11 @@ export default function Navbarsec(props) {
       <nav id="container-secondary-navbar">
         <ul>
           <li className="dropdown">
-            <a href="#">
+            <div className="account">
               <span className="dd-title">
                 Account <i className="fa fa-caret-down"></i>
               </span>
-            </a>
+            </div>
             <div className="dd">
               <div id="up_arrow"></div>
               <ul>{showHideLogin()}</ul>
@@ -69,10 +69,10 @@ export default function Navbarsec(props) {
             <Link to={"/"}>Home</Link>
           </li>
           <li>
-            <a href="#">About</a>
+            <Link to={"/about"}>About</Link>
           </li>
           <li>
-            <a href="#">Contact</a>
+            <Link to={"/contact"}>Contact</Link>
           </li>
         </ul>
         <div className="welcome-user-secnav">

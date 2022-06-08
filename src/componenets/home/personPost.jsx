@@ -1,8 +1,13 @@
 import React from "react";
+import RatingComponnent from "../rating/rating";
 
 export default function OneUserPost({ users }) {
-  const randUser = Math.ceil(Math.random() * users.length);
+  const randUser = Math.floor(Math.random() * users.length);
   const userToShow = users[randUser];
+  if (userToShow === undefined) {
+    console.log("User num :", randUser);
+    return <div>Error 151</div>;
+  }
   return (
     <div className="random-post">
       <div>
@@ -12,6 +17,8 @@ export default function OneUserPost({ users }) {
         <h2>About</h2>
         {userToShow.aboutMe}
         <h3>Rating:</h3>
+        {console.log(userToShow)}
+        <RatingComponnent rating={userToShow.rating} size={15} />
       </div>
     </div>
   );

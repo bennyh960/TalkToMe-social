@@ -48,7 +48,7 @@ export default function Person() {
     });
 
     console.log("accept edit");
-    if (user.id == JSON.parse(localStorage.getItem("user")).id) {
+    if (user.id.toString() === JSON.parse(localStorage.getItem("user")).id) {
       localStorage.setItem("user", JSON.stringify(user));
       console.log("update user on local storage");
     }

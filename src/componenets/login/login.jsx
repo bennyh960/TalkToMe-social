@@ -15,7 +15,7 @@ export default function LoginForm() {
       setUser(JSON.parse(checkOnLocalUser));
       setIsLogedIn(true);
     }
-    // console.log(checkOnLocalUser.email);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const LogIn = ({ email, password }) => {

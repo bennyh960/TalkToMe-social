@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import "./chatFreindsView.css";
 
 export default function ChatFriendsView({ user, users, handleFriendChatClickP, setUnreadMsg }) {
