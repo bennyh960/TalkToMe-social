@@ -1,8 +1,13 @@
 .chat-friends-view-container {
   height: 100%;
   width: 25%;
-  background-color: aqua;
-  overflow: scroll;
+  background-color: rgb(202, 211, 211);
+  overflow-y: scroll;
+}
+@media screen and (max-width: 430px) {
+  .chat-friends-view-container {
+    height: 60vh;
+  }
 }
 
 .friend-container {
@@ -11,6 +16,7 @@
   margin: 0.5rem auto;
   height: 5rem;
   border: 1px solid black;
+  background-color: rgba(210, 245, 200, 0.715);
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -18,6 +24,9 @@
   cursor: pointer;
 }
 
+.chat-friends-view-container > *:nth-child(even) {
+  background-color: rgba(197, 241, 241, 0.71);
+}
 .freind-img {
   width: 3rem;
   height: 3rem;

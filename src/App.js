@@ -12,6 +12,8 @@ import Person from "./componenets/person/person";
 // import { data } from "./draft/draft";
 import adminPic from "./assets/images/admin_key.png";
 import Home from "./componenets/home/home";
+import People from "./componenets/people/people";
+import About from "./componenets/about/about";
 
 export const loginContext = React.createContext();
 
@@ -21,6 +23,7 @@ export default function App() {
   const [isError, setIsError] = useState(false);
   const [errorGeneral, setErrorGeneral] = useState("");
   const [unreadMsg, setUnreadMsg] = useState(0);
+  const [visitFrindId, setVisitFriendId] = useState("");
 
   // * Login variables
   const ADMIN = {
@@ -75,6 +78,10 @@ export default function App() {
   // useEffect(() => {
   //   console.log(user);
   // });
+  const visitMeFunc = (id) => {
+    // console.log(typeof id);
+    setVisitFriendId(id);
+  };
 
   const handleRegisterBtn = () => {
     setRegisterDisplay((prev) => !prev);
@@ -88,14 +95,20 @@ export default function App() {
           <Navbarsec handleRegisterBtn={handleRegisterBtn} />
           {isLoading && <Spinner />}
           <Route path={"/"} exact>
-            {users.length > 1 && <Home users={users.slice(1)} />}
+            {users.length > 1 && <Home users={users.slice(1)} visitMeFunc={visitMeFunc} />}
           </Route>
-
+          <Route path={"/about"} exact>
+            <About />
+          </Route>
           <LoginForm />
           {registerDisplay && <RegisterForm users={users} />}
           {isError && <Error error={errorGeneral} />}
-          <Route path={"/users/" + user.name} exact>
+
+          <Route path={`/users/${user.name}/${user.id}`} exact>
             <Person />
+          </Route>
+          <Route path={`/users/visitor/${visitFrindId}`} exact>
+            <People users={users} user={user} visitId={visitFrindId} />
           </Route>
         </loginContext.Provider>
       </Router>

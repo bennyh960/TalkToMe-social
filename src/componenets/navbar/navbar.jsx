@@ -17,7 +17,8 @@ export default function NavBar({ user, unreadMsg, users }) {
       </div>
       {user.email && (
         <div className="navbar-links">
-          <Link to={"/users/" + user.name}>
+          {/* <Link to={"/users/" + user.name}> */}
+          <Link to={`/users/${user.name}/${user.id}`}>
             <img src={user.photoProfile} alt="profile avatar navbar" className="profile-img-navbar" />
           </Link>
           <div

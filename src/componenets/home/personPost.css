@@ -1,0 +1,62 @@
+.random-post {
+  width: 45%;
+  /* margin: auto; */
+  height: 100%;
+  /* border: 1px solid gray; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  line-height: 1.5rem;
+  /* background-color: aliceblue; */
+}
+
+@media screen and (max-width: 430px) {
+  .random-post {
+    width: 80%;
+    /* border: 1px solid black; */
+    /* background-color: red; */
+  }
+  .logo-link-container::before {
+    right: 0;
+  }
+}
+
+.post-name-logo-img-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-link-container {
+  position: relative;
+  /* border: 1px solid black; */
+  width: 10rem;
+  height: 10rem;
+}
+.logo-link {
+  /* position: relative; */
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  /* border: 1px solid black; */
+  /* background-color: antiquewhite; */
+  background-image: url("../../assets/images/logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 250%;
+}
+
+.logo-link-container::before {
+  content: "TalkToMe";
+  position: absolute;
+  top: 40%;
+  left: 32%;
+  /* width: 10rem; */
+  /* height: 10rem; */
+  /* z-index: 2; */
+  font-size: 10px;
+  font-weight: bold;
+  /* color: blue; */
+  cursor: pointer;
+  /* border: 1px solid black; */
+}

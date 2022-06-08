@@ -4,7 +4,7 @@ import "./home.css";
 import PersonCard from "./personCard";
 import OneUserPost from "./personPost";
 
-export default function Home({ users }) {
+export default function Home({ users, visitMeFunc }) {
   const [randomIdArr, setRandomIdArr] = useState([]);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function Home({ users }) {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const generateRandomCards = (users) => {
+  const generateRandomCards = (users, visitMeFunc) => {
     return randomIdArr.map((id) => {
       const userToShow = users.find((user) => user.id === id.toString());
       //   console.log(userToShow, id);
@@ -29,6 +29,8 @@ export default function Home({ users }) {
             name={userToShow.name}
             background={userToShow.background}
             rating={userToShow.rating}
+            id={userToShow.id}
+            visitMe={visitMeFunc}
           />
         </React.Fragment>
       );
@@ -39,7 +41,7 @@ export default function Home({ users }) {
     <div className="homepage-container">
       <div className="landing-page-container">
         <OneUserPost users={users} />
-        <div className="people-container">{generateRandomCards(users)}</div>
+        <div className="people-container">{generateRandomCards(users, visitMeFunc)}</div>
       </div>
     </div>
   );

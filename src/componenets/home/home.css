@@ -2,7 +2,7 @@
   height: 70vh;
   width: 90vw;
   margin: auto;
-  background-color: red;
+  /* background-color: red; */
 }
 
 .landing-page-container {
@@ -12,11 +12,21 @@
   justify-content: space-between;
 }
 
-.random-post {
-  width: 45%;
-  /* margin: auto; */
-  height: 100%;
-  border: 1px solid gray;
+@media screen and (max-width: 430px) {
+  /* html {
+    font-size: 8px;
+  } */
+
+  .homepage-container {
+    /* width: fit-content; */
+  }
+  .landing-page-container {
+    flex-direction: column;
+    border: 1px solid black;
+    width: fit-content;
+    align-items: center;
+    overflow: scroll;
+  }
 }
 
 /* second componenet -card */
@@ -32,7 +42,20 @@
   border-radius: 50%;
   background-color: aliceblue;
   font-size: 7px;
+  animation: fadeIn 0.5s ease-in;
 }
+
+@keyframes fadeIn {
+  from {
+    background-color: black;
+    /* transform: rotate(0deg); */
+  }
+  to {
+    background-color: aliceblue;
+    /* transform: rotate(360deg); */
+  }
+}
+
 .person-card-border {
   width: 9.4rem;
   height: 9.4rem;
@@ -50,11 +73,8 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   width: 40%;
-  /* height: 80%; */
-  /* padding: 3rem; */
   gap: 2rem;
-  border: 1px solid blue;
-  /* margin: auto; */
+  /* border: 1px solid blue; */
   justify-content: center;
   align-items: center;
   /* grid-auto-flow: row; */
@@ -75,8 +95,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   text-align: center;
   width: 7rem;
+  color: black;
   /* font-size: px; */
 }

@@ -1,5 +1,7 @@
 import React from "react";
 import RatingComponnent from "../rating/rating";
+import VisitLogo from "../visitMeLogo/visitLogo";
+import "./personPost.css";
 
 export default function OneUserPost({ users }) {
   const randUser = Math.floor(Math.random() * users.length);
@@ -10,16 +12,21 @@ export default function OneUserPost({ users }) {
   }
   return (
     <div className="random-post">
+      <VisitLogo userShow={userToShow} showImg={true} />
       <div>
-        <h2>{userToShow.name + " " + userToShow.lastName}</h2>
-        <h2>Background:</h2>
+        <h3>Background: </h3>
         {userToShow.background}
+      </div>
+      <div>
         <h2>About</h2>
         {userToShow.aboutMe}
+      </div>
+      <div>
         <h3>Rating:</h3>
-        {console.log(userToShow)}
         <RatingComponnent rating={userToShow.rating} size={15} />
       </div>
+      {/* {console.log(userToShow)} */}
+      {/* </div> */}
     </div>
   );
 }

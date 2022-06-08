@@ -1,6 +1,6 @@
 .chat-outer-container {
   display: flex;
-  height: 70vh;
+  height: 60vh;
   /* height: 90vh; */
   /* margin: auto; */
 }
@@ -11,8 +11,8 @@
   /* margin: 0 0 0 5vw; */
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
-  overflow: scroll;
+  /* border: 1px solid red; */
+  overflow-y: scroll;
   /* position: relative; */
 }
 

@@ -62,7 +62,7 @@ export default function ChatMassanger({ user, users, closeBtn, setUnreadMsg }) {
   }
 
   return (
-    <div className="chat-massanger">
+    <div className="chat-massanger chat-border">
       <form onSubmit={(e) => submitHandler(e)} className="chat-form">
         <div className="close-chat-btn-container">
           <label style={{ padding: "3px" }}>friend ID:</label>

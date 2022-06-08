@@ -1,17 +1,35 @@
+.chat-border {
+  /* background-color: red; */
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin: auto;
+  border: 1px solid black;
+}
 .chat-massanger {
+  /* border-radius: 5px; */
   position: absolute;
   top: -7rem;
   width: 80%;
-  /* height: 80vh; */
   margin: 0 10rem;
-  /* background-color: bisque; */
   background-image: url("../../assets/images/chatBG.jpg");
 }
+
+@media screen and (max-width: 430px) {
+  .chat-massanger {
+    top: 0rem;
+    left: -5rem;
+    height: 70vh;
+  }
+}
+
 .chat-form {
   display: flex;
   flex-direction: column;
   width: 100%;
   /* margin: 0 0 0 5vw; */
+  /* background-color: red; */
+  padding: 2px;
+  border-radius: 3px;
   margin: auto;
   flex-wrap: nowrap;
   border: 1px solid black;

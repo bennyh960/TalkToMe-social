@@ -98,10 +98,10 @@ export default function Person() {
         </div>
       </div>
       <div>
-        <button onClick={() => setShowChat((p) => !p)}>
+        <button className="secondary-btn" onClick={() => setShowChat((p) => !p)}>
           chat <FontAwesomeIcon icon={faComment} className="bell-icon" />
         </button>
-        <button onClick={() => setShowPopUp((p) => !p)}>
+        <button className="secondary-btn" onClick={() => setShowPopUp((p) => !p)}>
           Edit Profile <FontAwesomeIcon icon={faEdit} />
         </button>
         {showPopUp && (
@@ -138,26 +138,3 @@ function PersonOneData({ dataName, dataX, dataY }) {
     </div>
   );
 }
-// function PersonOneData({ dataName, dataX, dataY, showEdit, user }) {
-//   const [isShownEdit, setIsShownEdit] = useState(false);
-//   const [showPopUp, setShowPopUp] = useState(false);
-//   return (
-//     <div className="person-one-data">
-//       <div>
-//         <span className="bold-text">{dataName}:</span> {dataX + " " + dataY}
-//       </div>
-//       {showEdit && (
-//         <button
-//           onClick={() => setShowPopUp((p) => !p)}
-//           className="edit-btn-icon"
-//         >
-//           <FontAwesomeIcon icon={faEdit} />
-//         </button>
-//       )}
-//       {isShownEdit && <div className="show-data-over">Edit {dataName} </div>}
-//       {showPopUp && <Popup massage={`Editing: ${dataName}`} type={"edit"} dataToEdit={user} />}
-//     </div>
-//   );
-// }
-
-//massage= what will see, type="edit/or no" , dataToEdit=not now ,handleEdit=not now

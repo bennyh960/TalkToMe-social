@@ -2,6 +2,8 @@
   width: 30rem;
   padding: 0.5rem;
   background-image: linear-gradient(to bottom right, #00ffae, #7848fe);
+  position: absolute;
+  z-index: 100;
 }
 .form-title {
   display: flex;

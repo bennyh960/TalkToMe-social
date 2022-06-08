@@ -1,0 +1,39 @@
+.about-container {
+  width: 100vw;
+}
+.box-1 {
+  width: 97%;
+  margin: auto;
+  font-weight: normal;
+  height: 30vh;
+  text-align: center;
+  background-color: rgba(112, 127, 239, 0.845);
+  position: relative;
+}
+.title-about {
+  font-size: 4rem;
+  font-weight: 300;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.team-img {
+  width: 40vw;
+  height: 40vh;
+}
+
+.box-1 .subhead {
+  width: 40%;
+  margin: auto;
+  /* initial-letter: 4; */
+}
+
+.subhead::first-letter {
+  initial-letter: 3;
+  font-size: 3rem;
+}
+
+/* .start-letter {
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 5rem;
+} */

@@ -36,8 +36,7 @@ export default function Navbarsec(props) {
       return (
         <>
           {/* fix it from name to user id */}
-          <Link to={`/users/${user.name}`}>
-            {" "}
+          <Link to={`/users/${user.name}/${user.id}`}>
             <div id="user-account">{user.name}</div>
           </Link>
           <div>
