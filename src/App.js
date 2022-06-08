@@ -88,7 +88,7 @@ export default function App() {
           <Navbarsec handleRegisterBtn={handleRegisterBtn} />
           {isLoading && <Spinner />}
           <Route path={"/"} exact>
-            <Home users={users.slice(1)} />
+            {users.length > 1 && <Home users={users.slice(1)} />}
           </Route>
 
           <LoginForm />
