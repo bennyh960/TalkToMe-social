@@ -3,6 +3,9 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
+  top: 0;
+  /* border: 1px solid black; */
+  /* margin: 2rem; */
 }
 
 .logo-link-container {

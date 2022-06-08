@@ -10,9 +10,9 @@ import usersAPI from "../../api/usersAPI";
 import ChatMassanger from "../chat/chat";
 // todo delete this import
 
-export default function Person() {
+export default function Person({ openMassanger, friendID, SetOpenMassanger }) {
   const [showChat, setShowChat] = useState(false);
-
+  // console.log(friendID);
   const [showPopUp, setShowPopUp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [tempUserdata, setTempUserData] = useState("");
@@ -122,8 +122,19 @@ export default function Person() {
         )}
       </div>
 
-      {showChat && (
-        <ChatMassanger setUnreadMsg={setUnreadMsg} user={user} users={users} closeBtn={() => setShowChat((p) => !p)} />
+      {(showChat || openMassanger) && (
+        <ChatMassanger
+          setUnreadMsg={setUnreadMsg}
+          user={user}
+          users={users}
+          contantFriend={friendID}
+          openMassanger={openMassanger}
+          setOpenMassanger={SetOpenMassanger}
+          closeBtn={() => {
+            SetOpenMassanger(false);
+            setShowChat((p) => !p);
+          }}
+        />
       )}
     </div>
   );

@@ -1,14 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./chat.css";
 import usersAPI from "../../api/usersAPI";
 // import Loader1 from "../loader/loader";
 import ChatHistory from "./chatHistory";
 
-export default function ChatMassanger({ user, users, closeBtn, setUnreadMsg }) {
+export default function ChatMassanger({
+  user,
+  users,
+  closeBtn,
+  setUnreadMsg,
+  contantFriend,
+  SetOpenMassanger,
+  openMassanger,
+}) {
   const [rechiverID, setFriendID] = useState("");
   const [rechiverName, setFriendName] = useState("");
   const [rechiverImg, setFriendImg] = useState("");
   const [msg, setMsg] = useState("");
+
+  useEffect(() => {
+    if (openMassanger) {
+      setFriendID(() => contantFriend);
+      // setMsg(() => "Hi");
+      updateChatMassanger(user, contantFriend);
+      // setMsg("");
+      console.log("New friend id ", contantFriend, "can get a massage");
+    }
+    // eslint-disable-next-line
+  }, []);
 
   // const [isLoading, setIsloading] = useState(false);
 
@@ -58,6 +77,7 @@ export default function ChatMassanger({ user, users, closeBtn, setUnreadMsg }) {
 
   function handleFriendChatClickPPP(id) {
     setFriendID((p) => id);
+    // console.log(typeof id);
     // updateChatMassanger(user, id);
   }
 

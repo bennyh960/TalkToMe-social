@@ -2,20 +2,21 @@ import React, { useContext } from "react";
 import "./navbarsec.css";
 import { Link } from "react-router-dom";
 import { loginContext } from "../../App";
+import { useHistory } from "react-router-dom";
 
 export default function Navbarsec(props) {
   const { user, setDisplayLogin, setUser, setIsLogedIn } = useContext(loginContext);
-
+  const history = useHistory();
   function handleLoginBtn() {
     setDisplayLogin(true);
   }
   function handleLogOutBtn() {
     // console.log(user);
-
     setUser("");
     setIsLogedIn(false);
     setDisplayLogin(false);
     localStorage.clear();
+    history.push("/");
 
     console.log("Loged Out");
   }
@@ -71,7 +72,7 @@ export default function Navbarsec(props) {
             <Link to={"/about"}>About</Link>
           </li>
           <li>
-            <Link to={"/search"}>Search-People</Link>
+            <Link to={"/search"}>Search</Link>
           </li>
           <li>
             <Link to={"/contact"}>Contact</Link>

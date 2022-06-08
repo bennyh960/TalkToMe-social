@@ -3,7 +3,7 @@ import RatingComponnent from "../rating/rating";
 import VisitLogo from "../visitMeLogo/visitLogo";
 import "./personPost.css";
 
-export default function OneUserPost({ users }) {
+export default function OneUserPost({ users, user, contactFriend }) {
   const randUser = Math.floor(Math.random() * users.length);
   const userToShow = users[randUser];
   if (userToShow === undefined) {
@@ -12,7 +12,7 @@ export default function OneUserPost({ users }) {
   }
   return (
     <div className="random-post">
-      <VisitLogo userShow={userToShow} showImg={true} />
+      <VisitLogo userShow={userToShow} showImg={true} loginUser={user} contactFriend={contactFriend} />
       <div>
         <h3>Background: </h3>
         {userToShow.background}

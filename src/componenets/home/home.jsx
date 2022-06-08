@@ -4,7 +4,7 @@ import "./home.css";
 import PersonCard from "./personCard";
 import OneUserPost from "./personPost";
 
-export default function Home({ users, visitMeFunc }) {
+export default function Home({ user, users, visitMeFunc, contactFriend }) {
   const [randomIdArr, setRandomIdArr] = useState([]);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function Home({ users, visitMeFunc }) {
   return (
     <div className="homepage-container">
       <div className="landing-page-container">
-        <OneUserPost users={users} />
+        <OneUserPost users={users} user={user} contactFriend={contactFriend} />
         <div className="people-container">{generateRandomCards(users, visitMeFunc)}</div>
       </div>
     </div>
@@ -61,7 +61,7 @@ function getRandomArr(usersLength) {
     // const randGrid = Math.floor(Math.random() * gridLength) + 1;
     if (arrForID.indexOf(randID) === -1) arrForID.push(randID);
     // if (arrForGrid.indexOf(randGrid) === -1) arrForGrid.push(randGrid);
-    console.log(arrForID);
+    // console.log(arrForID);
   }
   return arrForID;
 }

@@ -37,6 +37,12 @@ export default function App() {
   const [users, setUsers] = useState([ADMIN]);
   const [displayLogin, setDisplayLogin] = useState(true);
 
+  const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const [isLogedIn, setIsLogedIn] = useState(false);
+  const [registerDisplay, setRegisterDisplay] = useState(true);
+  const [openMassanger, setOpenMassanger] = useState(false);
+  // const [friendID, setOpenFriendID] = useState("");
+
   useEffect(() => {
     console.log("update unread massages");
   }, [unreadMsg]);
@@ -58,11 +64,7 @@ export default function App() {
     fetchUsers();
     // console.log(unreadMsg);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const [user, setUser] = useState({ name: "", email: "", password: "" });
-  const [isLogedIn, setIsLogedIn] = useState(false);
-  const [registerDisplay, setRegisterDisplay] = useState(true);
+  }, [user.massanger]);
 
   const logInObj = {
     users,
@@ -87,6 +89,12 @@ export default function App() {
   const handleRegisterBtn = () => {
     setRegisterDisplay((prev) => !prev);
   };
+
+  function contactFriend(friendID) {
+    console.log("contact friend ID:", friendID);
+    setOpenMassanger(true);
+    setVisitFriendId(friendID);
+  }
   return (
     <>
       <Router>
@@ -96,7 +104,9 @@ export default function App() {
           <Navbarsec handleRegisterBtn={handleRegisterBtn} />
           {isLoading && <Spinner />}
           <Route path={"/"} exact>
-            {users.length > 1 && <Home users={users.slice(1)} visitMeFunc={visitMeFunc} />}
+            {users.length > 1 && (
+              <Home users={users.slice(1)} visitMeFunc={visitMeFunc} user={user} contactFriend={contactFriend} />
+            )}
           </Route>
           <Route path={"/about"} exact>
             <About />
@@ -105,11 +115,11 @@ export default function App() {
             <Search users={users} visitMeFunc={visitMeFunc} />
           </Route>
           <LoginForm />
-          {registerDisplay && <RegisterForm users={users} />}
+          {!isLogedIn && registerDisplay && <RegisterForm users={users} />}
           {isError && <Error error={errorGeneral} />}
 
           <Route path={`/users/${user.name}/${user.id}`} exact>
-            <Person />
+            <Person openMassanger={openMassanger} friendID={visitFrindId} SetOpenMassanger={setOpenMassanger} />
           </Route>
           <Route path={`/users/visitor/${visitFrindId}`} exact>
             <People users={users} user={user} visitId={visitFrindId} />
