@@ -4,19 +4,19 @@ TalkToMe is a social network that connects curious and young people who want to 
 
 ## Include:
 
-[^1]: Appreance for guests.
-[^2]: Appreance for members , which mean login/logout and register new members.
-[^3]: Hompe page generate random users with thier rating .
-[^4]: Chat Massanger for members only , to concet each other.
-[^5]: Contact us page.
-[^6]: Editing data .
-[^7]: Fully Responsive .
+● Appreance for guests.  
+● Appreance for members , which mean login/logout and register new members.  
+● Hompe page generate random users with thier rating .  
+● Chat Massanger for members only , to concet each other.  
+● Contact us page.  
+● Editing data.  
+● Fully Responsive.
 
 ### Routes:
 
 ● Home  
 ● Account - for logedin user  
-● Friend data
+● Friend information  
 ● About  
 ● Search  
 ● Contatct
