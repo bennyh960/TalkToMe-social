@@ -16,6 +16,10 @@
   /* position: relative; */
 }
 
+.chat-container::-webkit-scrollbar {
+  display: none;
+}
+
 .sender-chat-box,
 .rechiver-chat-box {
   border-radius: 10px;

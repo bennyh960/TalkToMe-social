@@ -5,8 +5,8 @@ import VisitLogo from "../visitMeLogo/visitLogo";
 export default function People({ user, users, visitId, contactFriend }) {
   const currentUserVisting = users.find((u) => u.id === visitId.toString());
 
-  const { userName, age, phone, photoProfile, aboutMe, city, country, background, jobTitle } = currentUserVisting;
-  console.log(user);
+  const { userName, age, phone, photoProfile, aboutMe, city, country, background } = currentUserVisting;
+  // console.log(typeof currentUserVisting.userType);
   return (
     <div className="personal-page-container">
       <div className="personal-detailes-container">
@@ -19,7 +19,7 @@ export default function People({ user, users, visitId, contactFriend }) {
           <PersonOneData dataName="City" dataX={city} />
           <PersonOneData dataName="Phone" dataX={phone} />
           <PersonOneData dataName="Background" dataX={background} />
-          <PersonOneData dataName="Job Title" dataX={jobTitle} />
+          {/* <PersonOneData dataName="Job Title" dataX={jobTitle} /> */}
           <PersonOneData dataName="About Me" dataX={aboutMe} />
         </div>
         <div>

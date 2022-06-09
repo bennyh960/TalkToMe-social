@@ -17,6 +17,7 @@ export default function ChatFriendsView({ user, users, handleFriendChatClickP, s
     const friends = userFreindsList.map((friendID) => {
       return users.find((user) => user.id === friendID);
     });
+    // console.log(friends);
     return friends;
   }
 

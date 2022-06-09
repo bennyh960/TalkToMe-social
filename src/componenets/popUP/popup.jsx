@@ -26,17 +26,19 @@ export default class Popup extends Component {
 
 class InputToEdit extends Component {
   state = {
-    name: this.props.dataToEdit.name,
-    lastName: this.props.dataToEdit.lastName,
-    age: this.props.dataToEdit.age,
-    ID: this.props.dataToEdit.id,
-    photoProfile: this.props.dataToEdit.photoProfile,
-    country: this.props.dataToEdit.country,
-    city: this.props.dataToEdit.city,
-    phone: this.props.dataToEdit.phone,
-    background: this.props.dataToEdit.background,
-    password: this.props.dataToEdit.password,
-    aboutMe: this.props.dataToEdit.aboutMe,
+    name: this.props.dataToEdit ? this.props.dataToEdit.name : "",
+    lastName: this.props.dataToEdit ? this.props.dataToEdit.lastName : "",
+    age: this.props.dataToEdit ? this.props.dataToEdit.age : "",
+    ID: this.props.dataToEdit ? this.props.dataToEdit.id : "",
+    photoProfile: this.props.dataToEdit ? this.props.dataToEdit.photoProfile : "",
+    country: this.props.dataToEdit ? this.props.dataToEdit.country : "",
+    city: this.props.dataToEdit ? this.props.dataToEdit.city : "",
+    phone: this.props.dataToEdit ? this.props.dataToEdit.phone : "",
+    background: this.props.dataToEdit ? this.props.dataToEdit.background : "",
+    password: this.props.dataToEdit ? this.props.dataToEdit.password : "",
+    userType: this.props.dataToEdit ? this.props.dataToEdit.userType : "",
+    aboutMe: this.props.dataToEdit ? this.props.dataToEdit.aboutMe : "",
+    // isRequire: this.props.dataToEdit ? false : true,
   };
   handleInputEditItem = (e) => {
     e.preventDefault();
@@ -57,7 +59,13 @@ class InputToEdit extends Component {
       <form className="edit-input-data-form">
         <div className="edit-area">
           <label htmlFor="name">F.Name:</label>
-          <input type="text" value={this.state.name} id="name" onChange={this.handleInputEditItem} />
+          <input
+            type="text"
+            value={this.state.name}
+            id="name"
+            onChange={this.handleInputEditItem}
+            // required={this.state.isRequire}
+          />
         </div>
         <div className="edit-area">
           <label htmlFor="lastName">L.Name:</label>
@@ -87,24 +95,38 @@ class InputToEdit extends Component {
           <label htmlFor="background">Background:</label>
           <input type="text" value={this.state.background} id="background" onChange={this.handleInputEditItem} />
         </div>
-        <div className="edit-area">
-          <label htmlFor="password">Password:</label>
-          <input type="text" value={this.state.password} id="password" onChange={this.handleInputEditItem} />
-        </div>
-        <div className="edit-area-big">
-          <label htmlFor="about" id="about-label">
-            About Me:
-          </label>
 
-          <textarea
-            name="about"
-            id="about"
-            cols="30"
-            rows="10"
-            value={this.state.aboutMe}
-            onChange={this.handleInputEditItem}
-          ></textarea>
-        </div>
+        {this.props.dataToEdit && (
+          <div className="edit-area">
+            <label htmlFor="password">Password:</label>
+            <input type="text" value={this.state.password} id="password" onChange={this.handleInputEditItem} />
+          </div>
+        )}
+        {this.props.dataToEdit === undefined && (
+          <div className="edit-area">
+            <label htmlFor="userType">userType:</label>
+            <select name="userType" id="userType" onClick={this.handleInputEditItem} required>
+              <option value={true}>Hear</option>
+              <option value={false}>Talk</option>
+            </select>
+          </div>
+        )}
+        {this.props.dataToEdit && (
+          <div className="edit-area-big">
+            <label htmlFor="about" id="about-label">
+              About Me:
+            </label>
+
+            <textarea
+              name="about"
+              id="aboutMe"
+              cols="30"
+              rows="10"
+              value={this.state.aboutMe}
+              onChange={this.handleInputEditItem}
+            />
+          </div>
+        )}
       </form>
     );
   }

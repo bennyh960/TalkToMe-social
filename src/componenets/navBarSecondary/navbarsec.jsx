@@ -25,10 +25,10 @@ export default function Navbarsec(props) {
     if (user.email === "" || !user) {
       return (
         <>
-          <li>
+          <li className="not-user">
             <button onClick={handleLoginBtn}>Login</button>
           </li>
-          <li>
+          <li className="not-user">
             <button onClick={props.handleRegisterBtn}>Register</button>
           </li>
         </>
@@ -37,14 +37,16 @@ export default function Navbarsec(props) {
       return (
         <>
           {/* fix it from name to user id */}
+          {/* <li> */}
           <Link to={`/users/${user.name}/${user.id}`}>
-            <div id="user-account">{user.name}</div>
+            <li id="user-account">{user.name}</li>
           </Link>
-          <div>
+          {/* </li> */}
+          <li>
             <Link to={"/"}>
               <button onClick={handleLogOutBtn}>Logout</button>
             </Link>
-          </div>
+          </li>
         </>
       );
     }
@@ -62,7 +64,7 @@ export default function Navbarsec(props) {
             </div>
             <div className="dd">
               <div id="up_arrow"></div>
-              <ul>{showHideLogin()}</ul>
+              <ul className="dd-options">{showHideLogin()}</ul>
             </div>
           </li>
           <li>
