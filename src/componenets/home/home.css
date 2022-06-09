@@ -12,17 +12,10 @@
   justify-content: space-between;
 }
 
-@media screen and (max-width: 430px) {
-  /* html {
-    font-size: 8px;
-  } */
-
-  .homepage-container {
-    /* width: fit-content; */
-  }
+@media screen and (max-width: 530px) {
   .landing-page-container {
     flex-direction: column;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: fit-content;
     align-items: center;
     overflow: scroll;

@@ -11,29 +11,34 @@ export default function NavBar({ user, unreadMsg, users }) {
 
   return (
     <div className="navbar">
-      <Link to={"/about"}>
-        <div className="logo">
-          <img src={logo} alt="" height={"35rem"} />
-          TalkToMe.il
-        </div>
-      </Link>
-      {user.email && (
-        <div className="navbar-links">
-          {/* <Link to={"/users/" + user.name}> */}
-          <Link to={`/users/${user.name}/${user.id}`}>
-            <img src={user.photoProfile} alt="profile avatar navbar" className="profile-img-navbar" />
-          </Link>
-          <div
-            className="notification"
-            onMouseOver={() => setShowUnread(true)}
-            onMouseLeave={() => setShowUnread(false)}
-          >
-            <FontAwesomeIcon icon={faBell} className="bell-icon" />
-            {unreadMsg.current > 0 && <div className="notification-num">+{unreadMsg.current}</div>}
+      <div className="place1">
+        <Link to={"/about"}>
+          <div className="logo">
+            <img src={logo} alt="" height={"35rem"} />
+            TalkToMe.il
           </div>
-          {showUnreadMsg && <DrawTheUnreadMassage user={user} users={users} />}
-        </div>
-      )}
+        </Link>
+      </div>
+      <div className="place2"></div>
+      <div className="place3">
+        {user.email && (
+          <div className="navbar-links">
+            {/* <Link to={"/users/" + user.name}> */}
+            <Link to={`/users/${user.name}/${user.id}`}>
+              <img src={user.photoProfile} alt="profile avatar navbar" className="profile-img-navbar" />
+            </Link>
+            <div
+              className="notification"
+              onMouseOver={() => setShowUnread(true)}
+              onMouseLeave={() => setShowUnread(false)}
+            >
+              <FontAwesomeIcon icon={faBell} className="bell-icon" />
+              {unreadMsg.current > 0 && <div className="notification-num">+{unreadMsg.current}</div>}
+            </div>
+            {showUnreadMsg && <DrawTheUnreadMassage user={user} users={users} />}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

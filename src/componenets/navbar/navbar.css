@@ -5,14 +5,36 @@
   justify-content: space-between;
   font-size: 1.5rem;
   background-color: #64dcdc;
-  background-image: url("./socialbg.jpg");
-  /* background-image: url("https://st4.depositphotos.com/1006328/29275/v/1600/depositphotos_292756792-stock-illustration-dancing-old-people-happy-aged.jpg"); */
   align-items: center;
-  /* background-size: contain; */
-  /* background-clip: content-box; */
-  background-repeat: no-repeat;
-  /* background-size: 60vw 15vh; */
-  /* border: 1px solid black; */
+
+  /* background-repeat: no-repeat; */
+}
+
+@media screen and (max-width: 530) {
+  .navbar {
+    height: 10vh;
+    font-size: 1rem;
+  }
+}
+
+.navbar > * {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar .place1 {
+  flex: 1;
+  background-image: url("./socialbg.jpg");
+}
+.navbar .place2 {
+  background-image: url("./socialbg.jpg");
+  background-size: contain;
+  flex: 5;
+}
+.navbar .place3 {
+  background-image: url("./socialbg.jpg");
+  flex: 1;
 }
 
 a {
@@ -22,7 +44,7 @@ a {
 .navbar-links {
   display: flex;
   /* flex-direction: column; */
-  width: 10%;
+  width: 100%;
   /* height: 3rem; */
   justify-content: space-around;
   margin-right: 4rem;
@@ -45,8 +67,8 @@ a {
 
 .profile-img-navbar {
   border-radius: 50%;
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   border: 2px solid blue;
 }
 
