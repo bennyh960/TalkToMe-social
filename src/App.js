@@ -15,6 +15,7 @@ import Home from "./componenets/home/home";
 import People from "./componenets/people/people";
 import About from "./componenets/about/about";
 import Search from "./componenets/search/search";
+import Contact from "./componenets/contact/contact";
 
 export const loginContext = React.createContext();
 
@@ -123,6 +124,9 @@ export default function App() {
           </Route>
           <Route path={`/users/visitor/${visitFrindId}`} exact>
             <People users={users} user={user} visitId={visitFrindId} />
+          </Route>
+          <Route path={`/contact`} exact>
+            <Contact />
           </Route>
         </loginContext.Provider>
       </Router>
